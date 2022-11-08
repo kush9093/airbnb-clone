@@ -3,15 +3,16 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { delaccAPI } from '../../lib/account-api';
 export default function Cancleindex(prop:{onPress:Function,onClose:Function,data:string}) {
 
     const presshandle = () =>{
         prop.onPress("PLEDGE");
     }
 
-    const deletehandle = () =>{
-        //계정삭제부분
+    const deletehandle = async () =>{
+        let result = await delaccAPI(prop.data);
         prop.onClose()
     }
 
@@ -20,6 +21,7 @@ export default function Cancleindex(prop:{onPress:Function,onClose:Function,data
         <>
             <Box sx={{ p: 2 }}>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <ArrowBackIosNewIcon sx={{mb:1}} onClick={presshandle} />
                     <Typography variant='h5' sx={{mb:2}} fontWeight="bold" >정말 취소하시겠어요?</Typography>
                     <Typography sx={{mb:2}}>
                         에어비앤비의 커뮤니티 차별반대 서약과 서비스 약관에 동의하지 않으면,

@@ -24,7 +24,8 @@ export const handler: NextApiHandler<result> = async (req, res) => {
 
             return res.status(201).json({ result: true, data: data })
         }catch(e){
-            return res.status(404).json({result:false,data:e})
+            console.log(e);
+            return res.status(500).json({result:false,data:e})
         }
     } else {
         return res.status(500).json({result:false})

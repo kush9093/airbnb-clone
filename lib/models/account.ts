@@ -8,7 +8,7 @@ const AccountSchema = new mongoose.Schema<AccountData>({
     lastname : String,
     password : String,
     birthday : Date,
-    marketing : Boolean,
+    marketing : Date,
     state : Date,
 })
 

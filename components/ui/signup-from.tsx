@@ -6,6 +6,7 @@ import Signinindex from './signinindex';
 import Passwordform from './passwordindex';
 import Pledgeindex from './pledgeindex';
 import Cancleindex from './cancleindex';
+import { useSession } from 'next-auth/react';
 
 
 
@@ -14,13 +15,23 @@ export default function SignupFrom(prop: { signupmodal: Function, signup: boolea
     const [open, setOpen] = React.useState(prop.signup);
     const [modes,setModes] = React.useState<mode>("SIGNIN")
     const [email,setEmail] = React.useState<string>("")
+    const [provider,setProvider] = React.useState<string>("")
+    const {data,status} = useSession();
+    React.useEffect(()=>{   
+        if(status === "authenticated"){
+            handleClose();
+        }
+    },[status])
     const handleClose = () => {
         prop.signupmodal(false);
         setOpen(false);
     }
-    const signhandle = (val:mode,data?:string) => {
+    const signhandle = (val:mode,data?:string,provider?:string) => {
         if(data){
             setEmail(data);
+        }
+        if(provider){
+            setProvider(provider)
         }
         setModes(val);
     }
@@ -46,8 +57,8 @@ export default function SignupFrom(prop: { signupmodal: Function, signup: boolea
                 aria-describedby="modal-modal-description"
             >
                <Box sx={style}>
-               {modes === "SIGNIN" && <Signinindex onPress={signhandle}/>} 
-               {modes === "SIGNUP" && <Signupindex data={email} onPress={signhandle} />}
+               {modes === "SIGNIN" && <Signinindex onPress={signhandle} onClose={handleClose}  />} 
+               {modes === "SIGNUP" && <Signupindex data={email} onPress={signhandle} provider={provider} />}
                {modes === "PASSWORD" && <Passwordform data={email} onClose={handleClose} />}
                {modes === "PLEDGE" && <Pledgeindex data={email} onPress={signhandle} onClose={handleClose} />}
                {modes === "CANCLE" && <Cancleindex data={email} onPress={signhandle} onClose={handleClose} />}

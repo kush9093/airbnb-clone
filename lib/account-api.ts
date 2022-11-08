@@ -1,10 +1,11 @@
 import { AccountData } from "../interface";
 
 
-const serverAddress = "http://127.0.0.1:3000";
+const serverAddress = "http://localhost:3000";
 
 export async function signupAPI(account:AccountData){
     let endpoint = serverAddress + "/api/account/signup"
+    console.log(account);
     const response = await fetch(endpoint,{
         method: "POST",
         body: JSON.stringify({...account}),
@@ -36,4 +37,17 @@ export async function chdpassAPI(email:string,password:string){
     })
     const data = await response.json()
     return data
+}
+
+export async function delaccAPI(email:string){
+    let endpoint = serverAddress+"/api/account/delete"
+    const response = await fetch(endpoint,{
+        method:"POST",
+        body:JSON.stringify({email}),
+        headers:{
+            "Content-type":"application/json"
+        }
+    })
+    const data = await response.json();
+    return data;
 }

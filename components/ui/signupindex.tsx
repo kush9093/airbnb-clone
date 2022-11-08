@@ -15,15 +15,16 @@ import Checkbox from '@mui/material/Checkbox';
 import * as React from 'react';
 import { State } from '../../interface';
 import { signupAPI } from '../../lib/account-api';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-export default function Signupindex(prop:{data:string,onPress:Function}) {
+export default function Signupindex(prop:{data:string,onPress:Function,provider:string}) {
 
     const [values, setValues] = React.useState<State>({
         firstname:'',
         lastname:'',
         password: '',
         birthday:null,
-        marketing:null,
+        marketing:false,
         showPassword: false,
     });
 
@@ -32,7 +33,7 @@ export default function Signupindex(prop:{data:string,onPress:Function}) {
             if(prop !== 'marketing'){
                 setValues({ ...values, [prop]: event.target.value });
             } else {
-                setValues({ ...values, [prop]: event.target.checked ===true? new Date(Date.now()):null });
+                setValues({ ...values, [prop]: event.target.checked});
             }
         };
 
@@ -48,16 +49,23 @@ export default function Signupindex(prop:{data:string,onPress:Function}) {
     };
 
     const accounthandle = async () =>{
-        let data = await signupAPI({...values,email:prop.data,state:null});
-        if(data.result){
-            prop.onPress("PLEDGE")
+        try {
+            let data = await signupAPI({...values,email:prop.data,state:null,provider:prop.provider});
+            if(data.result){
+                prop.onPress("PLEDGE")
+            }   
+        } catch(e){
+            console.log(e);
         }
     }
 
     return (
         <>
-            <Typography sx={{ textAlign: "center", pb: 2, pt: 2 }} id="modal-modal-title" component="p">
-                <b>회원 가입 완료하기</b>
+            <Typography sx={{ pb: 2, pt: 2,flexDirection:"row", display: "flex" }} id="modal-modal-title">
+                <ArrowBackIosNewIcon sx={{ml:1}} onClick={()=>{prop.onPress("SIGNIN")}} />
+                <Typography sx={{width:"90%",textAlign:"center"}}>
+                <b>회원가입 완료하기</b>
+                </Typography>
             </Typography>
             <Divider />
             <Box sx={{ p: 2, overflow: "auto", height: 600 }}>

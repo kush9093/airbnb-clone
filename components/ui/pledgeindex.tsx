@@ -13,7 +13,8 @@ export default function Pledgeindex(prop:{onPress:Function,onClose:Function,data
         // 서버수정
         prop.onPress("CANCLE");
     }
-    const closehandle = () =>{
+    const closehandle = async () =>{
+
         prop.onClose();
     }
 
