@@ -55,5 +55,26 @@ DB Schema - email , lastname, firstname, birthday, password (bycript),
 				: 인증됬다고 처리 하면 안되고
 				: 이미 등록된 이메일이라서 못하게 막을껀지.
 				: 비밀번호를 물어봐서 맞으면 연동을 해주고, 소셜로그인 불가능
+
+
+	
+	숙소 등록 절차 부분
+
+	/hosting : 호스트 모드의 웰컴 페이지 (보류)
+	/become-a-host : 숙소 등록쪽 웰컴 페이지 
+		- 숙소 등록 완료하기 :
+		- 숙소 등록 시작하기 :
+	/become-a-host/intro : 숙소 등록 첫 화면
+	/become-a-host/property-type-group
+	/become-a-host/[roomid]/property-type
+================================================================
+
+	/pages/become-a-host/index
+						/intro
+						/property-type-group ==> 
+						/[id]/index (X);
+						/[id]/property-type
+						/[id]/privacy-type
+
 */
 

@@ -31,12 +31,10 @@ export default function Signinindex(props: { onPress: Function,onClose:Function 
     const emailhandle = async () => {
        if(email_check(emailref.current!.value)===true){
         let data = await chdEmailAPI(emailref.current!.value);
-        if (data.provider === "credentials") {
+        if (data) {
             props.onPress("PASSWORD", data.data)
-        } else if(data.provider) {
-            props.onPress("PASSWORD", emailref.current!.value,data.provider)
         } else {
-            props.onPress("SIGNUP", emailref.current!.value,data.provider)
+            props.onPress("SIGNUP", emailref.current!.value)
         }
        } else {
         setErr("이메일을 입력하세요.")

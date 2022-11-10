@@ -18,13 +18,17 @@ import { MouseEventHandler, useState } from "react";
 import Image from "next/image";
 import SignupFrom from "../ui/signup-from";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function CloneHeader() {
   const [anchorEl, setAnchorEl] = useState<null | Element>(null);
   const [signup, setSignup] = useState<boolean>(false);
 
   const { data, status } = useSession();
-  console.log(data);
+  
+  const router = useRouter();
+
+
   const openMenuHandle: MouseEventHandler = (evt) => {
     setAnchorEl(evt.currentTarget);
   };
@@ -80,7 +84,7 @@ export default function CloneHeader() {
               <MenuItem onClick={() => { signupmodal(true) }}>회원 가입</MenuItem>
               <MenuItem onClick={() => { signupmodal(true);closeMenuHandle(); }}>로그인</MenuItem>
               <Divider />
-              <MenuItem onClick={closeMenuHandle}>숙소 호스트 되기</MenuItem>
+              <MenuItem onClick={()=>{router.push("/become-a-host")}}>숙소 호스트 되기</MenuItem>
               <MenuItem onClick={closeMenuHandle}>도움말</MenuItem>
             </Box>
           }
@@ -92,7 +96,7 @@ export default function CloneHeader() {
             <MenuItem sx={{fontWeight:"bold"}}>여행</MenuItem>
             <MenuItem sx={{fontWeight:"bold"}}>위시리스트</MenuItem>
             <Divider />
-            <MenuItem>숙소 호스트 되기</MenuItem>
+            <MenuItem onClick={()=>{router.push("/become-a-host")}}>숙소 호스트 되기</MenuItem>
             <MenuItem>체험 호스팅하기</MenuItem>
             <MenuItem>호스트 추천하기</MenuItem>
             <MenuItem>계정</MenuItem>
