@@ -18,12 +18,12 @@ export default function Googlemodal({ onChangebox,onChangeCom,selelm }) {
                     </Typography>
                 </Box>
                 <Box sx={{ p: 2, overflowY: "scroll", maxHeight: "80%", }}>
-                    <TextField fullWidth id={selelm?"outlined-read-only-input":"outlined-search"} defaultValue={selelm?selelm?.address_components[4]?.long_name:""} variant="outlined" label="주/도" />
-                    <TextField fullWidth id={selelm?"outlined-read-only-input":"outlined-search"} defaultValue={selelm?selelm?.address_components[3]?.long_name:""} variant="outlined" label="도시" />
-                    <TextField fullWidth variant="outlined" label="도로명" defaultValue={selelm?selelm?.address_components[0]?.long_name:""} />
+                    <TextField fullWidth id={selelm?"outlined-read-only-input":"outlined-search"} defaultValue={selelm?selelm?.address_components[3]?.long_name:""} variant="outlined" label="주/도" />
+                    <TextField fullWidth id={selelm?"outlined-read-only-input":"outlined-search"} defaultValue={selelm?selelm?.address_components[2]?.long_name:""} variant="outlined" label="도시" />
+                    <TextField fullWidth variant="outlined" label="도로명" defaultValue={selelm?selelm?.address_components[1]?.long_name+" "+selelm?.address_components[0]?.long_name:""} />
                     <TextField fullWidth variant="outlined" label="아파트 이름, 동호수 등 (선택 사항)" />
-                    <TextField fullWidth variant="outlined" label="우편번호" defaultValue={selelm?selelm?.address_components[6]?.long_name:""} />
-                    <TextField fullWidth id={selelm?"outlined-read-only-input":"outlined-search"}defaultValue={selelm?selelm?.address_components[5]?.long_name+"-"+selelm?.address_components[5]?.short_name:""} variant="outlined" label="국가/지역" />
+                    <TextField fullWidth variant="outlined" label="우편번호" defaultValue={selelm?selelm?.address_components[5]?.long_name:""} />
+                    <TextField fullWidth id={selelm?"outlined-read-only-input":"outlined-search"}defaultValue={selelm?selelm?.address_components[4]?.long_name+"-"+selelm?.address_components[4]?.short_name:""} variant="outlined" label="국가/지역" />
                     <Divider sx={{ my: 2 }} />
 
                     <Box sx={{ display: "flex", flexDirection: "row" }}>

@@ -14,7 +14,6 @@ import Googlemaps from "../../../components/ui/googlemaps";
 
 export default function PropertyTypePage(prop: any) {
     const { itemId } = prop;
-    const [space, setSpaces] = React.useState('');
     const [btn, setBtn] = React.useState<boolean>(true);
     const [inputValue, setInputValue] = React.useState<string>('');
     const [predictions, setPredictions] = React.useState<any[] | null>(null);
@@ -22,7 +21,16 @@ export default function PropertyTypePage(prop: any) {
     const [latlng,setLatlng] = React.useState<string>("37.5666805,126.9784147")
     const [compo,setCompo] = React.useState<string>("detail")
     const [combox,setCombox] = React.useState<string>("default")
+    let val1;
+    let val2;
+    const textelm = (dval1:string,dval2:string) => {
+        val1 = dval1;
+        val2 = dval2;
+    }
 
+    if(selelm){
+        console.log("selelm",selelm.address_components[4].long_name);
+    }
     React.useEffect(() => {
         const timerId = setTimeout(async () => {
             // 
@@ -31,11 +39,10 @@ export default function PropertyTypePage(prop: any) {
                 return;
             }
             const endPoint =
-                `/google/autocomplete?input=${inputValue}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&language=ko&components=country:kr`
+                `/google/autocomplete?input=${inputValue}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&language=ko&components=country:kr&types=address`
             const response = await fetch(endPoint);
             const json = await response.json();
             setPredictions(json.predictions)
-            console.log(predictions)
         }, 500)
         return () => {
             console.log(timerId + ".. cancled")
@@ -46,9 +53,33 @@ export default function PropertyTypePage(prop: any) {
     const router = useRouter();
     const nextStepHandle = async () => {
         //업데이트 부분
-        const data = await updatekind(itemId, "space", space);
-        router.push("/become-a-host/" + itemId + "/location");
+        if(selelm){
+            const data = await updatekind(itemId,"address",{
+                country:selelm.address_components[4]!.long_name,
+                cities:selelm.address_components[3]!.long_name,
+                district:selelm.address_components[2]!.long_name,
+                RoadName:selelm.address_components[1]!.long_name,
+                RoadNumber:selelm.address_components[0]!.long_name.trim() ,
+                lat:val1,
+                lng:val2,
+            })
+            console.log(data);
+            router.push("/become-a-host/" + itemId + "/floor-plan");
+        }
+       
     };
+    const previousHandle = () => {
+        if(combox === "next"){
+            setCombox("default")
+        } else if(compo === "modal"){
+            setCompo("detail");
+        } else {
+            router.push({
+                pathname: '/become-a-host/[itemId]/privacy-type',
+                query: { itemId },
+              })
+        }
+    }
 
     const onInputValue = (val:string) => {
         setInputValue(val)
@@ -93,14 +124,12 @@ export default function PropertyTypePage(prop: any) {
                             </Box>
                         }
                         {
-                            combox === "next" && <Googlemaps selelm={selelm} />
+                            combox === "next" && <Googlemaps selelm={selelm} textelm={textelm} />
                         }
                             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                <Link href="/become-a-host/property-type-group">
-                                    <Button sx={{ mr: 5, mb: 2, px: 3.5, py: 1, color: "black", textDecorationLine: "underline" }} variant="text" color="error">
+                                    <Button onClick={previousHandle} sx={{ mr: 5, mb: 2, px: 3.5, py: 1, color: "black", textDecorationLine: "underline" }} variant="text" color="error">
                                         <b>뒤로</b>
                                     </Button>
-                                </Link>
                                 <Button onClick={nextStepHandle} disabled={btn} sx={{ mr: 5, mb: 2, px: 3.5, py: 1, backgroundColor: "#E61E4D" }} variant="contained" color="error">
                                     <b>다음</b>
                                 </Button>

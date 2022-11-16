@@ -30,7 +30,7 @@ export default function Googledetail({changeElm,onChangeCom,inputValue,onInputVa
                             <ListItemButton onClick={async () => {
                                 setPredictions(null);
                                 onInputValue(elm.structured_formatting.main_text);
-                                const endpoint = `/google/details?place_id=${elm.place_id}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&language=ko`
+                                const endpoint = `/google/details?place_id=${elm.place_id}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&language=ko&`
                                 const response = await fetch(endpoint);
                                 const json = await response.json();
                                 

@@ -27,6 +27,12 @@ export default function PropertyTypePage(prop:any) {
         setSpaces(nextView);
         setBtn(false);
     };
+    const previousHandle = () =>{
+        router.push({
+            pathname: '/become-a-host/[itemId]/property-type',
+            query: { itemId },
+          })
+    }
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
@@ -68,11 +74,9 @@ export default function PropertyTypePage(prop:any) {
                                 </ToggleButtonGroup>
                             </Box>
                             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                <Link href="/become-a-host/property-type-group">
-                                    <Button sx={{ mr: 5, mb: 2, px: 3.5, py: 1, backgroundColor: "#E61E4D" }} variant="contained" color="error">
+                                    <Button onClick={previousHandle} sx={{ mr: 5, mb: 2, px: 3.5, py: 1, backgroundColor: "#E61E4D" }} variant="contained" color="error">
                                         <b>뒤로</b>
                                     </Button>
-                                </Link>
                                 <Button onClick={nextStepHandle} disabled={btn} sx={{ mr: 5, mb: 2, px: 3.5, py: 1, backgroundColor: "#E61E4D" }} variant="contained" color="error">
                                     <b>다음</b>
                                 </Button>

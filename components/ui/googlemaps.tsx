@@ -2,7 +2,12 @@ import { Box, Typography } from '@mui/material';
 import { CSSProperties, useCallback, useEffect, useRef } from 'react';
 import RoomIcon from '@mui/icons-material/Room';
 
-export default function Googlemaps({selelm}) {
+export default function Googlemaps({selelm,textelm}:{selelm:any}) {
+    let lat = selelm.geometry.location.lat??37.5656
+    let lng = selelm.geometry.location.lng??126.9769
+    let markerstyle = {
+        position: "absolute", zIndex: 2, top: "45vh", left: "50%" 
+    }
     const mapElement = useRef(null);
     const loadScript = useCallback((url: string) => {
         const firstScript = window.document.getElementsByTagName('script')[0];
@@ -18,15 +23,23 @@ export default function Googlemaps({selelm}) {
         if (!mapElement.current || !google) return;
 
 
-        const location = { lat: 37.5656, lng: 126.9769 };
+        const location = { lat: lat, lng: lng };
         const map = new google.maps.Map(mapElement.current, {
             zoom: 17,
             center: location,
+            zoomControl:false,
+            mapTypeControl:false,
+            fullscreenControl:false,
+            streetViewControl:false,
         });
+        map.addListener("dragend",()=>{
+            textelm(map.getCenter()?.lat(),map.getCenter()?.lng())
+        })
     };
 
 
     useEffect(() => {
+        textelm(lat,lng)
         const script = window.document.getElementsByTagName('script')[0];
         const includeCheck = script.src.startsWith(
             'https://maps.googleapis.com/maps/api'
@@ -49,7 +62,7 @@ export default function Googlemaps({selelm}) {
             <RoomIcon />
                 <Typography sx={{pl:2}}>{selelm.formatted_address.split(" ").slice(0,4).join(" ")}</Typography>
             </Box>
-            <RoomIcon fontSize="large" sx={{ position: "absolute", zIndex: 2, top: "45vh", left: "50%" }} />
+            <RoomIcon id='icon' fontSize="large" sx={markerstyle} />
             <Box ref={mapElement} style={{ minHeight: '90vh' }} />
         </Box>
     );
