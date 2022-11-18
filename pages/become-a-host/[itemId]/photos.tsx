@@ -1,5 +1,5 @@
 
-import { Box, Button, Divider, Chip, Avatar, Paper } from "@mui/material";
+import { Box, Button, Divider, Chip, Avatar, Paper, ImageList } from "@mui/material";
 import Link from "next/link";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -12,13 +12,32 @@ import ImageUploadBox from "../../../components/photo/ImageUploadBox";
 
 export default function PhotosPage(prop:any) {
     const {itemId} = prop;
-    const [btn, setBtn] = React.useState(true);
+    const [btn, setBtn] = React.useState(false);
     const router = useRouter();
+    const [ImageList,setImageList] = React.useState([]);
     const nextStepHandle = async () => {
         //업데이트 부분
+        const formData = new FormData();
 
-        router.push("/become-a-host/" + itemId + "/title");
+        formData.append("itemId",itemId as string);
+
+        ImageList.forEach((one)=>{
+            formData.append("photos",one);
+        })
+
+
+        const response = fetch("/api/hosting/uploadPhotos",{
+            method:"POST",
+            body:formData,
+        })
+
+
+        // router.push("/become-a-host/" + itemId + "/title");
     };
+
+    const ImageHandle = (arr) =>{
+        setImageList(arr);
+    }
 
     const previousHandle = () =>{
         router.push({
@@ -49,7 +68,7 @@ export default function PhotosPage(prop:any) {
                                 </Box>
                             </Box>
                             <Box>
-                                    <ImageUploadBox />
+                                    <ImageUploadBox ImageHandle={ImageHandle} />
 
                             </Box>
                             <Box sx={{ display: "flex", justifyContent: "space-between" }}>

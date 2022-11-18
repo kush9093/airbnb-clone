@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import ImagePreview from "./ImagePreview";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
-export default function ImageUploadBox({ max = 10 }) {
+export default function ImageUploadBox({ max = 10 ,ImageHandle}) {
     const [uploadedImages, setUploadedImages] = useState([]);
     const [previewImages, setPreviewImages] = useState([]);
     const uploadBoxRef = useRef();
@@ -67,6 +67,7 @@ export default function ImageUploadBox({ max = 10 }) {
             return <ImagePreview image={image} idx={index} deleteFunc={deleteFunc} key={index} />;
         });
         setPreviewImages(imageJSXs);
+        ImageHandle(uploadedImages);
     }, [uploadedImages]);
 
 
