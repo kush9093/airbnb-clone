@@ -26,9 +26,21 @@ export async function findacc(_id:string){
     const data = await response.json()
     return data
 }
+export async function finduser(targetUser:string){
+    let endpoint = serverAddress + `/api/accommodation/finduser`
+    const response = await fetch(endpoint,{
+        method: "POST",
+        body:JSON.stringify({targetUser}),
+        headers:{
+            "Content-type":"application/json"
+        }
+    })
+    const data = await response.json()
+    return data
+}
 
 
-export async function updatekind(_id:string,kind:string,type:string){
+export async function updatekind(_id:string,kind:string,type?:string){
     let endpoint = serverAddress + `/api/accommodation/updatekind`
     const response = await fetch(endpoint,{
         method: "POST",
@@ -40,3 +52,6 @@ export async function updatekind(_id:string,kind:string,type:string){
     const data = await response.json()
     return data
 }
+
+
+

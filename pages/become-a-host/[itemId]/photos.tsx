@@ -44,7 +44,7 @@ export default function PhotosPage(prop: any) {
         })
 
 
-        // router.push("/become-a-host/" + itemId + "/title");
+        router.push("/become-a-host/" + itemId + "/title");
     };
 
     const ImageHandle = (arr) => {
@@ -53,7 +53,7 @@ export default function PhotosPage(prop: any) {
 
     const previousHandle = () => {
         router.push({
-            pathname: '/become-a-host/[itemId]/location',
+            pathname: '/become-a-host/[itemId]/photos',
             query: { itemId },
         })
     }

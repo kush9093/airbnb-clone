@@ -27,6 +27,7 @@ export default function PropertyTypePage(prop: any) {
     }
     const nextStepHandle = async () => {
         //업데이트 부분
+        await updatekind(itemId,"floor",floor)
         router.push("/become-a-host/" + itemId + "/photos");
     };
 

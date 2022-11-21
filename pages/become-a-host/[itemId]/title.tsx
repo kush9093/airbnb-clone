@@ -7,6 +7,7 @@ import * as React from 'react';
 import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import ErrorIcon from '@mui/icons-material/Error';
+import { updatekind } from "../../../lib/accommodation-api";
 
 
 
@@ -18,8 +19,11 @@ export default function TitlePage(prop: any) {
     const router = useRouter();
     const nextStepHandle = async () => {
         //업데이트 부분
-
-        router.push("/become-a-host/" + itemId + "/title");
+        if(text.length !== 0){
+            await updatekind(itemId,"title",text)
+            router.push("/become-a-host/" + itemId + "/price");
+        }
+        
     };
 
     const previousHandle = () => {
