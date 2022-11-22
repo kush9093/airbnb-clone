@@ -4,11 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import ImagePreview from "./ImagePreview";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
-export default function ImageUploadBox({ max = 10 ,ImageHandle}:{ImageHandle:any,max:number}) {
+export default function ImageUploadBox({ImageHandle}:{ImageHandle:any}) {
     const [uploadedImages, setUploadedImages] = useState<any[]>([]);
     const [previewImages, setPreviewImages] = useState([]);
+    const [max, setMax] = useState(10);
     const uploadBoxRef = useRef<HTMLLabelElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+
     useEffect(() => {
         const uploadBox = uploadBoxRef.current!;
         const input = inputRef.current!;

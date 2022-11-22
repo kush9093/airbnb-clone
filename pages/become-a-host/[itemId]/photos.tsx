@@ -22,7 +22,7 @@ export default function PhotosPage(prop: any) {
         formData.append("itemId", itemId as string);
 
 
-        function dataURLtoFile(dataurl, filename) {
+        function dataURLtoFile(dataurl:any, filename:any) {
             var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
                 bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
             while (n--) {
@@ -47,7 +47,7 @@ export default function PhotosPage(prop: any) {
         router.push("/become-a-host/" + itemId + "/title");
     };
 
-    const ImageHandle = (arr) => {
+    const ImageHandle = (arr:any) => {
         setImageList(arr);
     }
 
