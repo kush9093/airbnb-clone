@@ -6,12 +6,12 @@ import After from "../../components/becomehosthome/after";
 import Begin from "../../components/becomehosthome/begin";
 import { finduser } from "../../lib/accommodation-api";
 export default function BecomeHostHome() {
-    const [arr,setArr] = useState();
+    const [arr,setArr] = useState([]);
     const {data,status} = useSession();
     useEffect(()=>{
     !async function(){
         if(data?.user!){
-           const response = await finduser(data?.user.email);
+           const response = await finduser(data?.user.email as string);
            setArr(response.data)
         }
     }()
