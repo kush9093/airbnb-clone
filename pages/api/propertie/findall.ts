@@ -1,8 +1,10 @@
 import { NextApiHandler } from "next";
 import Propertie from "../../../lib/models/propertie";
+import dbConnect from "../../../lib/dbConnect"
 
 export const handler: NextApiHandler = async (req, res) => {
     const { method } = req;
+    await dbConnect();
     if (method === "GET") {
         const data = await Propertie.find({});
         if (data) {

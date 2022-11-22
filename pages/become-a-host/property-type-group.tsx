@@ -72,7 +72,7 @@ export default function BecomeHostHome(prop: { propertie: any }) {
                                 </ToggleButtonGroup>
                             </Box>
                             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                <Link href="/become-a-host/property-type-group">
+                                <Link href="/become-a-host">
                                     <Button sx={{ mr: 5, mb: 2, px: 3.5, py: 1, backgroundColor: "#E61E4D" }} variant="contained" color="error">
                                         <b>뒤로</b>
                                     </Button>

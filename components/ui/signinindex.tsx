@@ -31,7 +31,8 @@ export default function Signinindex(props: { onPress: Function,onClose:Function 
     const emailhandle = async () => {
        if(email_check(emailref.current!.value)===true){
         let data = await chdEmailAPI(emailref.current!.value);
-        if (data) {
+        console.log(data);
+        if (data.result === true) {
             props.onPress("PASSWORD", data.data)
         } else {
             props.onPress("SIGNUP", emailref.current!.value)
@@ -45,7 +46,7 @@ export default function Signinindex(props: { onPress: Function,onClose:Function 
     const googleSigninHandle = () => {
         const topX = screenX + screen.width / 2 - 400 / 2
         const topY = screenY + screen.height / 2 - 550 / 2
-        window.open("http://localhost:3000/popup/google", "popup", `width=400,height=550,top=${topY},left=${topX}`);
+        window.open(`${process.env.NEXT_PUBLIC_SERVER_IP}/popup/gauth`, "popup", `width=400,height=550,top=${topY},left=${topX}`);
     }
 
 

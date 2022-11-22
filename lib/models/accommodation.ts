@@ -6,6 +6,10 @@ const AccommodationSchema = new mongoose.Schema({
     group:String,
     type:String,
     space:String,
+    title:String,
+    price:Number,
+    receipt:Date,
+    publish:Boolean,
     address:{
         country:String,
         cities:String,
@@ -20,7 +24,8 @@ const AccommodationSchema = new mongoose.Schema({
         guest:Number,
         bed:Number,
         bathroom:Number,
-    }
+    },
+    photos:[String]
 })
 
 export default (mongoose.models.Accommodation) || mongoose.model("Accommodation", AccommodationSchema);
