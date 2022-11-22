@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import { useState } from "react";
-export default function After({data,arr}) {
+export default function After({data,arr} : {data:any,arr:any}) {
     const router = useRouter();
     const [more,setMore] = useState(false);
 
@@ -15,7 +15,7 @@ export default function After({data,arr}) {
             </Box>
             <Box>
                 <Typography variant="h6" sx={{fontWeight:"bold"}}>숙소등록완료하기</Typography>
-                {arr.map((elm,idx)=>{
+                {arr.map((elm:any,idx:any)=>{
                     if(more===false?idx<3:true){
                     return (
                         <Box onClick={()=>{

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import ImagePreview from "./ImagePreview";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
-export default function ImageUploadBox({ max = 10 ,ImageHandle}) {
+export default function ImageUploadBox({ max = 10 ,ImageHandle}:{ImageHandle:any,max:number}) {
     const [uploadedImages, setUploadedImages] = useState([]);
     const [previewImages, setPreviewImages] = useState([]);
     const uploadBoxRef = useRef();
@@ -13,33 +13,33 @@ export default function ImageUploadBox({ max = 10 ,ImageHandle}) {
         const uploadBox = uploadBoxRef.current;
         const input = inputRef.current;
 
-        const handleFiles = (files) => {
+        const handleFiles = (files:any) => {
             for (const file of files) {
                 if (!file.type.startsWith("image/")) continue;
                 const reader = new FileReader();
                 reader.onloadend = (e) => {
-                    const result = e.target.result;
+                    const result = e.target!.result;
                     if (result) {
-                        setUploadedImages((state) => [...state, result].slice(0, max));
+                        setUploadedImages((state:any) => [...state, result].slice(0, max));
                     }
                 };
                 reader.readAsDataURL(file);
             }
         };
 
-        const changeHandler = (event) => {
+        const changeHandler = (event:any) => {
             const files = event.target.files;
             handleFiles(files);
         };
 
-        const dropHandler = (event) => {
+        const dropHandler = (event:any) => {
             event.preventDefault();
             event.stopPropagation();
             const files = event.dataTransfer.files;
             handleFiles(files);
         };
 
-        const dragOverHandler = (event) => {
+        const dragOverHandler = (event:any) => {
             event.preventDefault();
             event.stopPropagation();
         };
@@ -56,8 +56,8 @@ export default function ImageUploadBox({ max = 10 ,ImageHandle}) {
     }, [max]);
 
     useEffect(() => {
-        const imageJSXs = uploadedImages.map((image, index) => {
-            const isDeleteImage = (element) => {
+        const imageJSXs:any = uploadedImages.map((image, index) => {
+            const isDeleteImage = (element:any) => {
                 return element === image;
             };
             const deleteFunc = () => {
