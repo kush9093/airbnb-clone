@@ -91,7 +91,7 @@ export default function BecomeHostHome(prop: { propertie: any }) {
     )
 }
 
-export const getStaticProps:GetStaticProps = async (context) => {
+export const getServerSideProps:GetServerSideProps = async (context) => {
     const datas = await findpropertie();
     return {
         props: {
