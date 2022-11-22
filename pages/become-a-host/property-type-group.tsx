@@ -93,13 +93,11 @@ export default function BecomeHostHome(prop: { propertie: any }) {
 }
 
 export const getServerSideProps:GetServerSideProps = async (context) => {
-    await dbConnect();
     const datas = await findpropertie();
     return {
         props: {
             propertie : datas,
         }, // will be passed to the page component as props
-        revalidate: 20,
     };
 };
 
