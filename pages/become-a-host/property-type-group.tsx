@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { acccreate } from "../../lib/accommodation-api";
+import dbConnect from "../../lib/dbConnect";
 
 
 export default function BecomeHostHome(prop: { propertie: any }) {
@@ -92,6 +93,7 @@ export default function BecomeHostHome(prop: { propertie: any }) {
 }
 
 export const getServerSideProps:GetServerSideProps = async (context) => {
+    await dbConnect();
     const datas = await findpropertie();
     return {
         props: {
