@@ -17,7 +17,7 @@ export async function signupAPI(account:AccountData){
 }
 
 export async function chdEmailAPI(email:string){
-    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}api/account/signin?email=${email}`
+    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/account/signin?email=${email}`
     const response = await fetch(endpoint,{
         method: "GET",
     })
