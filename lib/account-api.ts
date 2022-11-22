@@ -25,6 +25,8 @@ export async function chdEmailAPI(email:string){
     return data
 }
 
+
+
 export async function chdpassAPI(email:string,password:string){
     let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/account/signin`
     const response = await fetch(endpoint,{

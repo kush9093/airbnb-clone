@@ -5,13 +5,13 @@ import ImagePreview from "./ImagePreview";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 export default function ImageUploadBox({ max = 10 ,ImageHandle}:{ImageHandle:any,max:number}) {
-    const [uploadedImages, setUploadedImages] = useState([]);
+    const [uploadedImages, setUploadedImages] = useState<any[]>([]);
     const [previewImages, setPreviewImages] = useState([]);
-    const uploadBoxRef = useRef();
-    const inputRef = useRef(null);
+    const uploadBoxRef = useRef<HTMLLabelElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
-        const uploadBox = uploadBoxRef.current;
-        const input = inputRef.current;
+        const uploadBox = uploadBoxRef.current!;
+        const input = inputRef.current!;
 
         const handleFiles = (files:any) => {
             for (const file of files) {

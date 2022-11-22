@@ -17,19 +17,19 @@ export default function PropertyTypePage(prop: any) {
     const [btn, setBtn] = React.useState<boolean>(true);
     const [inputValue, setInputValue] = React.useState<string>('');
     const [predictions, setPredictions] = React.useState<any[] | null>(null);
-    const [selelm, setSelelm] = React.useState<object | null>({address_components:[]});
+    const [selelm, setSelelm] = React.useState({} as {address_components:[{long_name:string},{long_name:string},{long_name:string},{long_name:string},{long_name:string}]});
     const [latlng,setLatlng] = React.useState<string>("37.5666805,126.9784147")
     const [compo,setCompo] = React.useState<string>("detail")
     const [combox,setCombox] = React.useState<string>("default")
-    let val1;
-    let val2;
+    let val1:any;
+    let val2:any;
     const textelm = (dval1:string,dval2:string) => {
         val1 = dval1;
         val2 = dval2;
     }
 
     if(selelm){
-        console.log("selelm",selelm.address_components[4].long_name);
+        console.log("selelm",selelm.address_components[4]!.long_name);
     }
     React.useEffect(() => {
         const timerId = setTimeout(async () => {
@@ -55,11 +55,11 @@ export default function PropertyTypePage(prop: any) {
         //업데이트 부분
         if(selelm){
             const data = await updatekind(itemId,"address",{
-                country:selelm.address_components[4]!.long_name,
-                cities:selelm.address_components[3]!.long_name,
-                district:selelm.address_components[2]!.long_name,
-                RoadName:selelm.address_components[1]!.long_name,
-                RoadNumber:selelm.address_components[0]!.long_name.trim() ,
+                country:selelm?.address_components[4]?.long_name,
+                cities:selelm?.address_components[3]?.long_name,
+                district:selelm?.address_components[2]?.long_name,
+                RoadName:selelm?.address_components[1]?.long_name,
+                RoadNumber:selelm?.address_components[0]?.long_name.trim() ,
                 lat:val1,
                 lng:val2,
             })
@@ -87,7 +87,7 @@ export default function PropertyTypePage(prop: any) {
     const onChangeCom = (val:string) => {
         setCompo(val);
     }
-    const changeElm = (val:object) => {
+    const changeElm = (val:any) => {
         setSelelm(val);
     }
 
