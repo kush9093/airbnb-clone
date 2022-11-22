@@ -48,7 +48,6 @@ export default function Googlemaps({selelm,textelm}:{selelm:any,textelm:any}) {
 
         if (includeCheck) return initMap();
 
-        //@ts-ignore
         window.initMap = initMap;
         const endpoint = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&callback=initMap&language=ko`
         loadScript(
