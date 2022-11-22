@@ -4,6 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import account from "../../../lib/models/account";
 import GoogleProvider from "next-auth/providers/google"
 import { signIn } from "next-auth/react";
+import dbConnect from "../../../lib/dbConnect"
 
 
 
@@ -16,6 +17,7 @@ export const option:NextAuthOptions =
         Credentials({
             async authorize(credentials, req) {
                 console.log("credentials - ",credentials);
+                await dbConnect();
                 const one = await account.findOne({ email: credentials!.email });
                 if (!one || !(await compare(credentials!.password, one.password))) {
                     return null

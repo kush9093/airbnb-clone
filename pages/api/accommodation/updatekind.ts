@@ -1,9 +1,10 @@
 import { NextApiHandler } from "next";
 import accommodation from "../../../lib/models/accommodation";
-
+import dbConnect from "../../../lib/dbConnect"
 export const handler: NextApiHandler = async (req, res) => {
     const { method,body } = req;
     console.log(body);
+    await dbConnect();
     let data;
     if (method === "POST") {
         if(body.kind === "type"){

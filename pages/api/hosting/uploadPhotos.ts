@@ -5,6 +5,7 @@ import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage"
 import fs from "fs"
 import { updatekind } from "../../../lib/accommodation-api";
+import dbConnect from "../../../lib/dbConnect"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -33,11 +34,9 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    console.log("====uploadPhtos ====");
-    console.log("req.body", req.body)
+    await dbConnect();
     const form = formidable({ multiples: true });
 
-    console.log("=== uploadPhotos ===");
 
     // 밑에꺼 완성해야됨
     const result = await new Promise((resolve, reject) => {
@@ -56,13 +55,13 @@ export default async function handler(
                 const result = await uploadBytes(fileRef, file, { contentType: one.mimetype! });
                 // console.log(result);
                 const url = await getDownloadURL(fileRef);
-                console.log(url);
+                // console.log(url);
                 await updatekind(fields.itemId,"photos",url);
             }
 
         });
     });
-    console.log(result);
+    // console.log(result);
 
 
     // form.parse(req,async (err,fields,files)=>{

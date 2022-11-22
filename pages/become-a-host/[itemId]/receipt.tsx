@@ -204,7 +204,6 @@ export default function Receiptpage(prop: any) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const data = await findacc(context.params?.itemId!)
-    console.log(data);
     return {
         props: { itemId: context.params?.itemId!, response: data },
     };

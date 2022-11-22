@@ -46,7 +46,7 @@ export default function Signinindex(props: { onPress: Function,onClose:Function 
     const googleSigninHandle = () => {
         const topX = screenX + screen.width / 2 - 400 / 2
         const topY = screenY + screen.height / 2 - 550 / 2
-        window.open("http://localhost:3000/popup/google", "popup", `width=400,height=550,top=${topY},left=${topX}`);
+        window.open(`${process.env.NEXT_PUBLIC_SERVER_IP}/popup/gauth`, "popup", `width=400,height=550,top=${topY},left=${topX}`);
     }
 
 

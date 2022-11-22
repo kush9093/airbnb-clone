@@ -20,10 +20,10 @@ const nextConfig = {
 }
 
 module.exports = () => {
-  const MONGO_URI = process.env.MONGO_URI;
+  // const MONGO_URI = process.env.MONGO_URI;
 
-  mongoose.connect(MONGO_URI, { dbName: "airbnb-clone" })
-    .then(() => console.log("mongoose Initialized"));
+  // mongoose.connect(MONGO_URI, { dbName: "airbnb-clone" })
+  //   .then(() => console.log("mongoose Initialized"));
 
   return nextConfig;
 
