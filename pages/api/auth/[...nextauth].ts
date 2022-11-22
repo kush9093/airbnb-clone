@@ -15,7 +15,7 @@ export const option:NextAuthOptions =
     },
     providers: [
         Credentials({
-            async authorize(credentials, req) {
+            async authorize(credentials:any, req:any) {
                 console.log("credentials - ",credentials);
                 await dbConnect();
                 const one = await account.findOne({ email: credentials!.email });

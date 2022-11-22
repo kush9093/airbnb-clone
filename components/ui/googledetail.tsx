@@ -1,7 +1,8 @@
 import { Box, InputAdornment, List, ListItemButton, ListItemText, TextField } from "@mui/material";
 import React from "react";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-export default function Googledetail({changeElm,onChangeCom,inputValue,onInputValue,predictions,setPredictions,setLatlng}) {
+export default function Googledetail({changeElm,onChangeCom,inputValue,onInputValue,predictions,setPredictions,setLatlng}:
+    {changeElm:any,onChangeCom:any,inputValue:any,onInputValue:any,predictions:any,setPredictions:any,setLatlng:any}) {
 
 
     return (
@@ -25,7 +26,7 @@ export default function Googledetail({changeElm,onChangeCom,inputValue,onInputVa
             {
                 predictions &&
                 <List component="nav" aria-label="secondary mailbox folder" sx={{ bgcolor: "white" }}>
-                    {predictions.map((elm) => {
+                    {predictions.map((elm:any) => {
                         return (
                             <ListItemButton onClick={async () => {
                                 setPredictions(null);

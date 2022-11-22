@@ -17,7 +17,7 @@ export default function PropertyTypePage(prop: any) {
     const [btn, setBtn] = React.useState<boolean>(true);
     const [inputValue, setInputValue] = React.useState<string>('');
     const [predictions, setPredictions] = React.useState<any[] | null>(null);
-    const [selelm, setSelelm] = React.useState<object | null>(null);
+    const [selelm, setSelelm] = React.useState<object | null>({address_components:[]});
     const [latlng,setLatlng] = React.useState<string>("37.5666805,126.9784147")
     const [compo,setCompo] = React.useState<string>("detail")
     const [combox,setCombox] = React.useState<string>("default")

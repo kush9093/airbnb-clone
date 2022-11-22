@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { CSSProperties, useCallback, useEffect, useRef } from 'react';
 import RoomIcon from '@mui/icons-material/Room';
 
-export default function Googlemaps({selelm,textelm}:{selelm:any}) {
+export default function Googlemaps({selelm,textelm}:{selelm:any,textelm:any}) {
     let lat = selelm.geometry.location.lat??37.5656
     let lng = selelm.geometry.location.lng??126.9769
     let markerstyle = {

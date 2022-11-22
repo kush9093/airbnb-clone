@@ -40,7 +40,7 @@ export async function finduser(targetUser:string){
 }
 
 
-export async function updatekind(_id:string,kind:string,type?:string){
+export async function updatekind(_id:string,kind:string,type?:string|object){
     let endpoint =  `${process.env.NEXT_PUBLIC_SERVER_IP}/api/accommodation/updatekind`
     const response = await fetch(endpoint,{
         method: "POST",

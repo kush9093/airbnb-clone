@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import * as React from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-export default function Googlemodal({ onChangebox,onChangeCom,selelm }) {
+export default function Googlemodal({ onChangebox,onChangeCom,selelm }:{onChangebox:any,onChangeCom:any,selelm:any}) {
     console.log(selelm);
 
     return (
@@ -33,6 +33,7 @@ export default function Googlemodal({ onChangebox,onChangeCom,selelm }) {
                         </Box>
                         <Box>
                             <FormControlLabel
+                            label
                                 control={
                                     <Switch
                                         name="loading"

@@ -47,7 +47,7 @@ export default async function handler(
             });
 
             const storage = getStorage(firebaseApp);
-            const dirRef = ref(storage, "hosting/", fields.itemId)
+            const dirRef = ref(storage, "hosting/"+fields.itemId)
             for (let one of files.photos as formidable.File[]) {
                 const fileRef = ref(dirRef, one.newFilename);
                 const file = fs.readFileSync(one.filepath);
@@ -56,7 +56,7 @@ export default async function handler(
                 // console.log(result);
                 const url = await getDownloadURL(fileRef);
                 // console.log(url);
-                await updatekind(fields.itemId,"photos",url);
+                await updatekind(fields.itemId as string,"photos",url);
             }
 
         });

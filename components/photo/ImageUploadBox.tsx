@@ -8,7 +8,7 @@ export default function ImageUploadBox({ max = 10 ,ImageHandle}:{ImageHandle:any
     const [uploadedImages, setUploadedImages] = useState([]);
     const [previewImages, setPreviewImages] = useState([]);
     const uploadBoxRef = useRef();
-    const inputRef = useRef();
+    const inputRef = useRef(null);
     useEffect(() => {
         const uploadBox = uploadBoxRef.current;
         const input = inputRef.current;
@@ -20,7 +20,7 @@ export default function ImageUploadBox({ max = 10 ,ImageHandle}:{ImageHandle:any
                 reader.onloadend = (e) => {
                     const result = e.target!.result;
                     if (result) {
-                        setUploadedImages((state:any) => [...state, result].slice(0, max));
+                        setUploadedImages((state) => [...state, result].slice(0, max));
                     }
                 };
                 reader.readAsDataURL(file);
