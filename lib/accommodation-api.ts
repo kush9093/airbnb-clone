@@ -1,8 +1,8 @@
-const serverAddress = "http://localhost:3000";
+
 
 
 export async function acccreate(targetUser:string,group:string){
-    let endpoint = serverAddress + `/api/accommodation/acccreate`
+    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/accommodation/acccreate`
     const response = await fetch(endpoint,{
         method: "POST",
         body:JSON.stringify({targetUser,group}),
@@ -15,7 +15,7 @@ export async function acccreate(targetUser:string,group:string){
 }
 
 export async function findacc(_id:string){
-    let endpoint = serverAddress + `/api/accommodation/findacc`
+    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/accommodation/findacc`
     const response = await fetch(endpoint,{
         method: "POST",
         body:JSON.stringify({_id}),
@@ -27,7 +27,7 @@ export async function findacc(_id:string){
     return data
 }
 export async function finduser(targetUser:string){
-    let endpoint = serverAddress + `/api/accommodation/finduser`
+    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/accommodation/finduser`
     const response = await fetch(endpoint,{
         method: "POST",
         body:JSON.stringify({targetUser}),
@@ -41,7 +41,7 @@ export async function finduser(targetUser:string){
 
 
 export async function updatekind(_id:string,kind:string,type?:string){
-    let endpoint = serverAddress + `/api/accommodation/updatekind`
+    let endpoint =  `${process.env.NEXT_PUBLIC_SERVER_IP}/api/accommodation/updatekind`
     const response = await fetch(endpoint,{
         method: "POST",
         body:JSON.stringify({_id,kind,type}),

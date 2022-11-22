@@ -1,10 +1,9 @@
 import { AccountData } from "../interface";
 
 
-const serverAddress = "http://localhost:3000";
 
 export async function signupAPI(account:AccountData){
-    let endpoint = serverAddress + "/api/account/signup"
+    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/account/signup`
     console.log(account);
     const response = await fetch(endpoint,{
         method: "POST",
@@ -18,7 +17,7 @@ export async function signupAPI(account:AccountData){
 }
 
 export async function chdEmailAPI(email:string){
-    let endpoint = serverAddress + `/api/account/signin?email=${email}`
+    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/account/signin?email=${email}`
     const response = await fetch(endpoint,{
         method: "GET",
     })
@@ -27,7 +26,7 @@ export async function chdEmailAPI(email:string){
 }
 
 export async function chdpassAPI(email:string,password:string){
-    let endpoint = serverAddress + `/api/account/signin`
+    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/account/signin`
     const response = await fetch(endpoint,{
         method: "POST",
         body:JSON.stringify({email,password}),
@@ -40,7 +39,7 @@ export async function chdpassAPI(email:string,password:string){
 }
 
 export async function delaccAPI(email:string){
-    let endpoint = serverAddress+"/api/account/delete"
+    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/account/delete`
     const response = await fetch(endpoint,{
         method:"POST",
         body:JSON.stringify({email}),

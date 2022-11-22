@@ -1,8 +1,7 @@
-const serverAddress = "http://localhost:3000";
 
 
 export async function findpropertie(){
-    let endpoint = serverAddress + `/api/propertie/findall`
+    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/propertie/findall`
     const response = await fetch(endpoint,{
         method: "GET",
     })
@@ -11,7 +10,7 @@ export async function findpropertie(){
 }
 
 export async function findprotype(group:string){
-    let endpoint = serverAddress + `/api/propertie/findone?group=${group}`
+    let endpoint =  `${process.env.NEXT_PUBLIC_SERVER_IP}/api/propertie/findone?group=${group}`
     const response = await fetch(endpoint,{
         method: "GET",
     })
