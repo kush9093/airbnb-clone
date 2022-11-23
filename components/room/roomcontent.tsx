@@ -15,6 +15,8 @@ import LocalLaundryServiceOutlinedIcon from '@mui/icons-material/LocalLaundrySer
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
 
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 
 
 export default function Roomcontent(prop:accomodationtype) {
@@ -32,6 +34,24 @@ export default function Roomcontent(prop:accomodationtype) {
         { name: "화재경보기", icons: <CampaignOutlinedIcon /> },
     ]
 
+    const dd = `후트베이 해변이 내려다보이는 이 평화로운 5베드룸 저택에서 온 가족과 함께 휴식을 취해보세요.
+
+    * * 12월부터 LOADSHEDDING 백업 *
+    
+    침실 5개 – 욕실 3개
+    
+    침실 5개를 자랑하는 넓고 현대적인 가족 숙소입니다. 메인 침실 (욕실이 딸린 욕실) 에는 킹사이즈 침대가 있고, 나머지 4개의 침실에는 퀸사이즈 침대가 있습니다.
+    
+    산이 내려다보이는 벽난로가 있는 개방형 주방과 라운지 공간.
+    
+    주방에는 시설이 완비되어 있습니다.
+    숙소
+    야외 피자 오븐, 바비큐 그릴, 대형 정원과 수영장이 있습니다.
+    
+    메인 침실 - 킹사이즈 침대 (전용 욕실)
+    나머지 침실 4개에는 퀸사이즈 침대가 있으며 욕실 2개를 공유합니다.
+    
+    월요일부터 금요일까지 하우스키핑 포함`
 
     return (
         <>
@@ -84,23 +104,12 @@ export default function Roomcontent(prop:accomodationtype) {
                     <Typography sx={{ fontWeight: "bold", textDecorationLine: "underline" }}>더 알아보기</Typography>
                 </Box>
             </Box>
-            <Divider sx={{ my: 2 }} />
+            <Divider sx={{ my: 2,mr:2 }} />
             <Box>
-                <Typography sx={{ my: 2 }}>
-                    일부 정보는 자동 번역되었습니다. 원문 보기
+                <Typography sx={{whiteSpace:"pre-wrap",my:2,textOverflow:"ellipsis",height:"200px",overflow:"hidden"}}>
+                {dd.length>200? dd.substring(0,200)+"...":dd}
                 </Typography>
-                <Typography sx={{ my: 2 }}>
-                    후트베이 해변이 내려다보이는 이 평화로운 5베드룸 저택에서 온 가족과 함께 휴식을 취해보세요.
-                </Typography>
-                <Typography sx={{ my: 2 }}>
-                    * * 12월부터 LOADSHEDDING 백업 *
-                </Typography>
-                <Typography sx={{ my: 2 }}>
-                    침실 5개 – 욕실 3개 ...
-                </Typography>
-                <Typography sx={{ my: 2, fontWeight: "bold", textDecorationLine: "underline" }}>
-                    더 보기
-                </Typography>
+                <Typography sx={{fontWeight:"bold",textDecorationLine:"underline"}}>더 보기<ChevronRightIcon sx={{verticalAlign:"-3px"}} fontSize="small"/></Typography>
             </Box>
             <Divider sx={{ my: 2 }} />
             <Box>
