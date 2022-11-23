@@ -26,6 +26,16 @@ export async function findacc(_id:string){
     const data = await response.json()
     return data
 }
+
+export async function findAllAcc(){
+    let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/accommodation/findacc`
+    const response = await fetch(endpoint,{
+        method: "GET"
+    })
+    const data = await response.json()
+    return data
+}
+
 export async function finduser(targetUser:string){
     let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/accommodation/finduser`
     const response = await fetch(endpoint,{

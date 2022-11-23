@@ -207,8 +207,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
         props: { itemId: context.params?.itemId!, response: data },
     };
-
-
 };
 
 

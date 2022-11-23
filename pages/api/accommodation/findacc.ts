@@ -12,7 +12,11 @@ export const handler: NextApiHandler = async (req, res) => {
         } else {
             return res.json({ result: false })
         }
-
+    } else if(method === "GET"){
+        const data = await accommodation.find({})
+        return res.json({data});
+    } else {
+        return res.json({})
     }
 }
 
