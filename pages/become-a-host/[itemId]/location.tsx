@@ -17,7 +17,7 @@ export default function PropertyTypePage(prop: any) {
     const [btn, setBtn] = React.useState<boolean>(true);
     const [inputValue, setInputValue] = React.useState<string>('');
     const [predictions, setPredictions] = React.useState<any[] | null>(null);
-    const [selelm, setSelelm] = React.useState({} as {address_components:[{long_name:string},{long_name:string},{long_name:string},{long_name:string},{long_name:string}]});
+    const [selelm, setSelelm] = React.useState({} as {address_components:{long_name:string}[]});
     const [latlng,setLatlng] = React.useState<string>("37.5666805,126.9784147")
     const [compo,setCompo] = React.useState<string>("detail")
     const [combox,setCombox] = React.useState<string>("default")
@@ -28,9 +28,6 @@ export default function PropertyTypePage(prop: any) {
         val2 = dval2;
     }
 
-    if(selelm){
-        console.log("selelm",selelm.address_components[4]!.long_name);
-    }
     React.useEffect(() => {
         const timerId = setTimeout(async () => {
             // 
