@@ -7,30 +7,31 @@ import Passwordform from './passwordindex';
 import Pledgeindex from './pledgeindex';
 import Cancleindex from './cancleindex';
 import { useSession } from 'next-auth/react';
+import Grid from "@mui/material/Grid"
 
 
 
 export default function SignupFrom(prop: { signupmodal: Function, signup: boolean }) {
-    type mode = "SIGNIN" | "SIGNUP"|"PASSWORD"|"PLEDGE"|"CANCLE";
+    type mode = "SIGNIN" | "SIGNUP" | "PASSWORD" | "PLEDGE" | "CANCLE";
     const [open, setOpen] = React.useState(prop.signup);
-    const [modes,setModes] = React.useState<mode>("SIGNIN")
-    const [email,setEmail] = React.useState<string>("")
-    const [provider,setProvider] = React.useState<string>("")
-    const {data,status} = useSession();
-    React.useEffect(()=>{   
-        if(status === "authenticated"){
+    const [modes, setModes] = React.useState<mode>("SIGNIN")
+    const [email, setEmail] = React.useState<string>("")
+    const [provider, setProvider] = React.useState<string>("")
+    const { data, status } = useSession();
+    React.useEffect(() => {
+        if (status === "authenticated") {
             handleClose();
         }
-    },[status])
+    }, [status])
     const handleClose = () => {
         prop.signupmodal(false);
         setOpen(false);
     }
-    const signhandle = (val:mode,data?:string,provider?:string) => {
-        if(data){
+    const signhandle = (val: mode, data?: string, provider?: string) => {
+        if (data) {
             setEmail(data);
         }
-        if(provider){
+        if (provider) {
             setProvider(provider)
         }
         setModes(val);
@@ -40,7 +41,7 @@ export default function SignupFrom(prop: { signupmodal: Function, signup: boolea
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: "30%",
+        width: "80%",
         bgcolor: 'background.paper',
         border: '2px solid #ffe',
         boxShadow: 24,
@@ -56,13 +57,15 @@ export default function SignupFrom(prop: { signupmodal: Function, signup: boolea
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-               <Box sx={style}>
-               {modes === "SIGNIN" && <Signinindex onPress={signhandle} onClose={handleClose}  />} 
-               {modes === "SIGNUP" && <Signupindex data={email} onPress={signhandle} provider={provider} />}
-               {modes === "PASSWORD" && <Passwordform data={email} onClose={handleClose} />}
-               {modes === "PLEDGE" && <Pledgeindex data={email} onPress={signhandle} onClose={handleClose} />}
-               {modes === "CANCLE" && <Cancleindex data={email} onPress={signhandle} onClose={handleClose} />}
-               </Box>
+                <Grid container spacing={2} columns={12}>
+                    <Grid item xs={10} md={6} lg={4} sx={style}>
+                        {modes === "SIGNIN" && <Signinindex onPress={signhandle} onClose={handleClose} />}
+                        {modes === "SIGNUP" && <Signupindex data={email} onPress={signhandle} provider={provider} />}
+                        {modes === "PASSWORD" && <Passwordform data={email} onClose={handleClose} />}
+                        {modes === "PLEDGE" && <Pledgeindex data={email} onPress={signhandle} onClose={handleClose} />}
+                        {modes === "CANCLE" && <Cancleindex data={email} onPress={signhandle} onClose={handleClose} />}
+                    </Grid>
+                </Grid>
             </Modal>
         </>
     );
