@@ -3,13 +3,13 @@ import { Grid, Box } from "@mui/material"
 import { accomodationtype } from "../../interface/accommodation";
 
 
-export default function Roomphoto(prop: accomodationtype) {
+export default function Roomphoto({data}:{data:accomodationtype}) {
 
 
     return (
-        <Box>
-            <Grid container spacing={2} columns={16}>
-                {prop.photos!.map((elm, idx) => {
+        <Box sx={{my:6}}>
+            <Grid container spacing={1} columns={16}>
+                {data.photos!.map((elm, idx) => {
                     if (idx === 0) {
                         return (
                             <Grid item xs={8}>
@@ -20,8 +20,8 @@ export default function Roomphoto(prop: accomodationtype) {
                     }
                 })}
                 <Grid item xs={8}>
-                    <Grid container spacing={2} columns={16}>
-                        {prop.photos!.map((elm, idx) => {
+                    <Grid container spacing={1} columns={16}>
+                        {data.photos!.map((elm, idx) => {
                             if (idx !== 0 && idx < 5) {
                                 if(idx === 2){
                                     return (

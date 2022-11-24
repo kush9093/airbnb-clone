@@ -13,7 +13,7 @@ export const handler: NextApiHandler = async (req, res) => {
             return res.json({ result: false })
         }
     } else if(method === "GET"){
-        const data = await accommodation.find({})
+        const data = await accommodation.find({publish:true})
         return res.json({data});
     } else {
         return res.json({})

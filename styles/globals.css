@@ -19,6 +19,14 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.MuiPickerStaticWrapper-content > div > div:first-of-type,
+.css-xelq0e-MuiPickerStaticWrapper-content > div > div:first-of-type {
+  display: none;
+}
+.css-3pa7bi-MuiDateRangePickerViewDesktop-container:not(:last-of-type) {
+  border-right: none;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

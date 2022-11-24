@@ -16,10 +16,19 @@ import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsAc
 import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
 
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import StaticDateRangePickerDemo from "./datalange";
+import { roomContext } from "../../pages/rooms/[roomId]";
+
+import {useContext,useEffect,useState} from "react"
 
 
 
-export default function Roomcontent(prop:accomodationtype) {
+export default function Roomcontent({data}:{data:accomodationtype}) {
+
+    const ctx = useContext(roomContext);
+    console.log(ctx);
+
+ 
 
     const convenience = [
         { name: "만 전망", icons: <TsunamiIcon /> },
@@ -57,8 +66,8 @@ export default function Roomcontent(prop:accomodationtype) {
         <>
             <Box sx={{ display: "flex", justifyContent: "space-between", my: 2 }}>
                 <Box>
-                    <Typography variant="h6" sx={{ fontWeight: "bold" }}>{prop.targetUser}님이 호스팅하는 {prop.group} 전체</Typography>
-                    <Typography>{`최대 인원 ${prop.floor!.guest}명 · 침대 ${prop.floor!.bed}개 · 욕실 ${prop.floor!.bathroom}개 `}</Typography>
+                    <Typography variant="h6" sx={{ fontWeight: "bold" }}>{data.targetUser?.split("@")[0]}님이 호스팅하는 {data.group} {data.space}</Typography>
+                    <Typography>{`최대 인원 ${data.floor!.guest}명 · 침대 ${data.floor!.bed}개 · 욕실 ${data.floor!.bathroom}개 `}</Typography>
                 </Box>
                 <Box>
                     <img src="/userpic.png" style={{ borderRadius: "50%" }} />
@@ -70,7 +79,7 @@ export default function Roomcontent(prop:accomodationtype) {
                     <MilitaryTechOutlinedIcon fontSize="large" />
                 </Box>
                 <Box>
-                    <Typography sx={{ fontWeight: "bold" }}>{prop.targetUser}님은 슈퍼호스트입니다.</Typography>
+                    <Typography sx={{ fontWeight: "bold" }}>{data.targetUser}님은 슈퍼호스트입니다.</Typography>
                     <Typography>슈퍼호스트는 풍부한 경험과 높은 평점을 자랑하며 게스트가 숙소에서 편안히 머무를 수 있도록 최선을 다하는 호스트입니다.</Typography>
                 </Box>
             </Box>
@@ -130,13 +139,10 @@ export default function Roomcontent(prop:accomodationtype) {
             </Box>
             <Divider sx={{ my: 2 }} />
             <Box>
-                <Box>
-                    <Typography>바뀌는부분</Typography>
-                    <Typography>날짜바뀌는부분</Typography>
-                </Box>
+                
                 <Box>
                     <Box>
-
+                        <StaticDateRangePickerDemo data={data} />
                     </Box>
                 </Box>
             </Box>

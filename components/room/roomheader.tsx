@@ -8,14 +8,14 @@ import { accomodationtype } from "../../interface/accommodation";
 
 
 
-export default function Roomheader(prop:accomodationtype)  {
+export default function Roomheader({data}:{data:accomodationtype})  {
 
 
     return (
         <>
-            <Typography variant="h5" sx={{ fontWeight: "bold", m: 1 }}><GTranslateIcon /> {prop.title}</Typography>
+            <Typography variant="h5" sx={{ fontWeight: "bold", m: 1 }}><GTranslateIcon /> {data.title}</Typography>
             <Box sx={{ display: "flex", justifyContent: "space-between", m: 2 }}>
-                <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>★5.0 · 후기 4개 · {prop.address!.district},{prop.address!.cities},{prop.address!.country}</Typography>
+                <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>★5.0 · 후기 4개 · {data.address!.district},{data.address!.cities},{data.address!.country}</Typography>
                 <Box sx={{ display: "flex" }}>
                     <IosShareIcon sx={{ verticalAlign: "middle" }} fontSize="small" />
                     <Typography variant="subtitle2" sx={{ fontWeight: "bold", textDecorationLine: "underline", mr: 3 }}>공유하기</Typography>
