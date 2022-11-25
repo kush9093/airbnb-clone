@@ -6,8 +6,6 @@ import * as React from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 export default function Googlemodal({ onChangebox,onChangeCom,selelm }:{onChangebox:any,onChangeCom:any,selelm:any}) {
-    console.log(selelm);
-
     return (
         <>
             <Box sx={{ bgcolor: "white", mt: "10%", p: 1, width: "65%", borderRadius: "10px", maxHeight: "80%" }}>

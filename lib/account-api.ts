@@ -4,7 +4,6 @@ import { AccountData } from "../interface";
 
 export async function signupAPI(account:AccountData){
     let endpoint = `${process.env.NEXT_PUBLIC_SERVER_IP}/api/account/signup`
-    console.log(account);
     const response = await fetch(endpoint,{
         method: "POST",
         body: JSON.stringify({...account}),

@@ -16,6 +16,9 @@ export const theme = createTheme({
   palette:{
     secondary :{
       main: "#000",
+    },
+    primary : {
+      main:"#ddd"
     }
   },
 });

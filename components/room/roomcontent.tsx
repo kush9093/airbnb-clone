@@ -16,7 +16,7 @@ import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsAc
 import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
 
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import StaticDateRangePickerDemo from "./datalange";
+import Datalange from "./datalange";
 import { roomContext } from "../../pages/rooms/[roomId]";
 
 import {useContext,useEffect,useState} from "react"
@@ -26,7 +26,6 @@ import {useContext,useEffect,useState} from "react"
 export default function Roomcontent({data}:{data:accomodationtype}) {
 
     const ctx = useContext(roomContext);
-    console.log(ctx);
 
  
 
@@ -142,7 +141,7 @@ export default function Roomcontent({data}:{data:accomodationtype}) {
                 
                 <Box>
                     <Box>
-                        <StaticDateRangePickerDemo data={data} />
+                        <Datalange data={data} mode={"default"}/>
                     </Box>
                 </Box>
             </Box>

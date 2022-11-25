@@ -33,7 +33,6 @@ export default function PhotosPage(prop: any) {
 
         ImageList.forEach((one) => {
             const file = dataURLtoFile(one, Date.now()+Math.floor(Math.random()*100));
-            console.log(file);
             formData.append("photos", file);
         })
 

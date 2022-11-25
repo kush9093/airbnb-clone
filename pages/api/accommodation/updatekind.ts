@@ -3,7 +3,6 @@ import accommodation from "../../../lib/models/accommodation";
 import dbConnect from "../../../lib/dbConnect"
 export const handler: NextApiHandler = async (req, res) => {
     const { method,body } = req;
-    console.log(body);
     await dbConnect();
     let data;
     if (method === "POST") {
@@ -24,7 +23,6 @@ export const handler: NextApiHandler = async (req, res) => {
         } else if (body.kind === "publish"){
             data = await accommodation.updateOne({_id:body._id},{$set:{publish:true,receipt:Date.now()}})
         }
-        console.log("data",data);
             if (data) {
             return res.json({ result: true, data})
         } else {

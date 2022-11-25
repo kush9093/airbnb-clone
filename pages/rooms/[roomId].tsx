@@ -15,9 +15,14 @@ export type Rmtype = {
     deff?:number
 }
 
+
 export const roomContext = createContext<{
     value:Rmtype,
-    chdvalue:Function
+    chdvalue:Function,
+    Ddopen:boolean,
+    chdDdopen:Function,
+    popopen:boolean,
+    chdPopopen:Function
 }|null>(null)
 
 export default function RoomIndex({ itemId, response }: { itemId: string, response: accomodationtype }) {
@@ -33,9 +38,24 @@ export default function RoomIndex({ itemId, response }: { itemId: string, respon
         })
     }
 
+    const [Ddopen,setDdopen] = useState<boolean>(false)
+
+    function chdDdopen(val:boolean){
+        setDdopen(()=>{
+            return val
+        })
+    }
+    const [popopen,setPopopen] = useState<boolean>(false)
+
+    function chdPopopen(val:boolean){
+        setPopopen(()=>{
+            return val
+        })
+    }
+
     return (
-        <roomContext.Provider value={{value:value,chdvalue:chdvalue}}>
-            <Grid container spacing={2} columns={16} sx={{ display: "flex", justifyContent: "center" }}>
+        <roomContext.Provider value={{value:value,chdvalue:chdvalue,Ddopen:Ddopen,chdDdopen:chdDdopen,popopen:popopen,chdPopopen:chdPopopen}}>
+            <Grid onClick={()=>{chdDdopen(false)}} container spacing={2} columns={16} sx={{ display: "flex", justifyContent: "center" }}>
                 <Grid item xs={10}>
                     <Box>
                         <Roomheader data={response} />

@@ -42,7 +42,6 @@ export default function PropertyTypePage(prop: any) {
             setPredictions(json.predictions)
         }, 500)
         return () => {
-            console.log(timerId + ".. cancled")
             clearTimeout(timerId);
         }
     }, [inputValue])
@@ -60,7 +59,6 @@ export default function PropertyTypePage(prop: any) {
                 lat:val1,
                 lng:val2,
             })
-            console.log(data);
             router.push("/become-a-host/" + itemId + "/floor-plan");
         }
        

@@ -48,8 +48,6 @@ export const option: NextAuthOptions =
     ],
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
-            console.log("credentials = ", credentials)
-            console.log("account", account)
             if (account?.provider === "credentials") {
                 return true;
             }

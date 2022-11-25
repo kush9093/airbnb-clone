@@ -1,96 +1,127 @@
-import { Box, Typography, ButtonGroup, Button, TextField, Accordion, AccordionSummary, AccordionDetails,Paper } from "@mui/material"
+import { Box, Typography, ButtonGroup, Button, TextField, Accordion, AccordionSummary, AccordionDetails, Paper, Divider, Popper, Fade } from "@mui/material"
 import { accomodationtype } from "../../interface/accommodation"
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import { roomContext } from "../../pages/rooms/[roomId]";
 import { format } from "date-fns";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import Datalange from "./datalange";
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Humandata from "./humandata";
 
 export default function Roommodal({ data }: { data: accomodationtype }) {
 
     const ctx = useContext(roomContext)
 
-    const buttons = [
-        <Button color="secondary" key="one" sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
-            <Typography variant="caption">체크인</Typography>
-            <Typography variant="body2">{ctx?.value.startwith !== null ? format(ctx?.value.startwith!, "yyyy-MM-dd") : "날짜 추가"}</Typography>
-        </Button>,
-        <Button color="secondary" key="two" sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
-            <Typography variant="caption">체크아웃</Typography>
-            <Typography variant="body2">{ctx?.value.endwidth !== null && ctx?.value.startwith!.getTime()! - ctx?.value.endwidth!.getTime()! == 0 ? format(ctx?.value.endwidth!, "yyyy-MM-dd") : "날짜 추가"}</Typography>
-        </Button>,
-    ];
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+        ctx?.chdPopopen(!ctx.popopen);
+    };
+
+    const canBeOpen = ctx?.popopen && Boolean(anchorEl);
+    const id = canBeOpen ? 'transition-popper' : undefined;
+
+
 
     return (
-        <Box sx={{ position: "sticky", top: 0 }}>
-            <Box sx={{ width: "80%", mx: "auto" }}>
-                <Typography>₩{data.price?.toString()}/박</Typography>
-                <Typography>★5.0 · 후기4개</Typography>
-            </Box>
-            <Box sx={{ width: "80%", mx: "auto", border: "1px solid black", borderRadius: "10px" }}>
-                <ButtonGroup size="large" fullWidth aria-label="large button group">
-                    {buttons}
-                </ButtonGroup>
-                <ButtonGroup size="large" fullWidth aria-label="large button group">
-                    <Button color="secondary" key="two" sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
-                        <Typography variant="caption">인원</Typography>
-                        <Typography variant="body2">게스트</Typography>
+        <Paper elevation={1} sx={{ position: "sticky", top: "5%", border: "1px solid #ddd", px: 1, py: 3, borderRadius: "10px" }}>
+            <Box sx={{ width: "90%", mx: "auto" }}>
+                {ctx?.value.endwidth !== null && ctx?.value.startwith!.getTime()! - ctx?.value.endwidth!.getTime()! !== 0 ?
+                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                        <Box sx={{ display: "flex", alignItems: "baseline" }}>
+                            <Typography variant="h6" sx={{ fontWeight: "500" }}>₩{data.price?.toString()}</Typography>
+                            <Typography>/박</Typography>
+                        </Box>
+                        <Typography>★5.0 · 후기4개</Typography>
+                    </Box> :
+                    <Box>
+                        <Typography variant="h6" sx={{ fontWeight: "500" }}>요금을 확인하려면 날짜를 입력하세요.</Typography>
+                        <Typography>★5.0 · 후기4개</Typography>
+                    </Box>
+                }
+                <ButtonGroup orientation="vertical" sx={{ my: 1, display: "flex", flexDirection: "column" }}>
+                    <Button color="secondary" sx={{ display: "flex", justifyContent: "start", p: 0, borderRadius: "10px 10px 0 0" }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            ctx?.chdDdopen(true);
+                        }}
+                    >
+                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start", width: "50%", py: 1, px: 2 }}>
+                            <Typography variant="caption">체크인</Typography>
+                            <Typography variant="body2">{ctx?.value.startwith !== null ? format(ctx?.value.startwith!, "yyyy-MM-dd") : "날짜 추가"}</Typography>
+                        </Box>
+                        <Divider orientation="vertical" color="black" flexItem></Divider>
+                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start", py: 1, px: 2, width: "50%" }}>
+                            <Typography variant="caption">체크아웃</Typography>
+                            <Typography variant="body2">{ctx?.value.endwidth !== null && ctx?.value.startwith!.getTime()! - ctx?.value.endwidth!.getTime()! !== 0 ? format(ctx?.value.endwidth!, "yyyy-MM-dd") : "날짜 추가"}</Typography>
+                        </Box>
                     </Button>
-                    <Paper elevation={1} sx={{ position: "absolute", top: "100%", border: "1px solid #ddd", borderRadius: "2px", width: "80%", left: "10%" }}>
-                        <Box sx={{ display: "flex", m: 2, justifyContent: "space-between" }}>
-                            <Box sx={{ alignItems: "start", display: "flex", flexDirection: "column" }}>
-                                <Typography>성인</Typography>
-                                <Typography>만 13세 이상</Typography>
-                            </Box>
-                            <Box sx={{ my: "auto", display: "flex" }}>
-                                <RemoveIcon sx={{ border: "1px solid #aaa", borderRadius: "50%",color:"#555" } } />
-                                <Typography>숫자</Typography>
-                                <AddIcon sx={{ border: "1px solid black", borderRadius: "50%" }} />
-                            </Box>
+                    <Button onClick={handleClick} color="secondary" key="two" sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", borderRadius: "0 0 10px 10px" }}>
+                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
+                            <Typography variant="caption">인원</Typography>
+                            <Typography variant="body2">게스트</Typography>
                         </Box>
-                        <Box sx={{ display: "flex", m: 2, justifyContent: "space-between" }}>
-                            <Box sx={{ alignItems: "start", display: "flex", flexDirection: "column" }}>
-                                <Typography>어린이</Typography>
-                                <Typography>만 2~12세 이상</Typography>
-                            </Box>
-                            <Box sx={{ my: "auto", display: "flex" }}>
-                                <RemoveIcon sx={{ border: "1px solid black", borderRadius: "50%" }} />
-                                <Typography>숫자</Typography>
-                                <AddIcon sx={{ border: "1px solid black", borderRadius: "50%" }} />
-                            </Box>
+                        <Box>
+                            <KeyboardArrowDownIcon sx={{ verticalAlign: "-3px" }} />
                         </Box>
-                        <Box sx={{ display: "flex", m: 2, justifyContent: "space-between" }}>
-                            <Box sx={{ alignItems: "start", display: "flex", flexDirection: "column" }}>
-                                <Typography>유아</Typography>
-                                <Typography>만 2 미만</Typography>
-                            </Box>
-                            <Box sx={{ my: "auto", display: "flex" }}>
-                                <RemoveIcon sx={{ border: "1px solid black", borderRadius: "50%" }} />
-                                <Typography>숫자</Typography>
-                                <AddIcon sx={{ border: "1px solid black", borderRadius: "50%" }} />
-                            </Box>
-                        </Box>
-                        <Box sx={{ display: "flex", m: 2, justifyContent: "space-between" }}>
-                            <Box sx={{ alignItems: "start", display: "flex", flexDirection: "column" }}>
-                                <Typography>반려동물</Typography>
-                                <Typography>보조동물을 동반하시나요?</Typography>
-                            </Box>
-                            <Box sx={{ my: "auto", display: "flex" }}>
-                                <RemoveIcon sx={{ border: "1px solid black", borderRadius: "50%" }} />
-                                <Typography>숫자</Typography>
-                                <AddIcon sx={{ border: "1px solid black", borderRadius: "50%" }} />
-                            </Box>
-                        </Box>
-                        <Box >
-                            <Typography>이 숙소의 최대 숙박 인원은 1명(유아 포함)입니다.</Typography>
-                            <Typography>반려동물 동반은 허용되지 않습니다.</Typography>
-                        </Box>
-                        <Box sx={{display:"flex",justifyContent:"flex-end"}}>
-                            닫기
-                        </Box>
-                    </Paper>
+                    </Button>
+
+                    <Popper id={id} open={ctx?.popopen!} anchorEl={anchorEl} placement={"bottom-start"} transition>
+                        {({ TransitionProps }) => (
+                            <Fade {...TransitionProps} timeout={350}>
+                                <Paper sx={{ bgcolor: 'background.paper', p: 3, width: "58%" }}>
+                                    <Humandata />
+                                </Paper>
+                            </Fade>
+                        )}
+                    </Popper>
+
+
+                    {ctx?.Ddopen &&
+                        <Paper elevation={1} sx={{ position: "absolute", zIndex: 1, top: "15%", right: "0%", backgroundColor: "none", py: 2, px: 3, borderRadius: "20px" }}>
+                            <Datalange data={data} mode={"extends"} />
+                        </Paper>
+                    }
+
                 </ButtonGroup>
+                <Box>
+                    <Box sx={{ my: 1 }}>
+                            {ctx?.value.endwidth !== null && ctx?.value.startwith!.getTime()! - ctx?.value.endwidth!.getTime()! !== 0 ?
+                                <Button variant="contained" color="error" sx={{ width: "100%", mt: 1, py: 1 }}>
+                                    <Typography variant="body1" sx={{ fontWeight: "bold" }}>예약하기</Typography>
+                                </Button> : 
+                                <Button onClick={(e)=>{e.stopPropagation();ctx?.chdDdopen(true)}} variant="contained" color="error" sx={{ width: "100%", mt: 1, py: 1 }}>
+                                    <Typography variant="body1" sx={{ fontWeight: "bold" }}>예약 가능 여부</Typography>
+                                </Button>
+                            }
+                        <Typography variant="subtitle2" sx={{ py: 1, textAlign: "center" }}>예약 확정 전에는 요금이 청구되지 않습니다.</Typography>
+                    </Box>
+                </Box>
+                {ctx?.value.endwidth !== null && ctx?.value.startwith!.getTime()! - ctx?.value.endwidth!.getTime()! !== 0 &&
+                    <>
+                        <Box>
+                            <Box sx={{ display: "flex", justifyContent: "space-between", my: 1 }}>
+                                <Typography sx={{ textDecorationLine: "underline" }}>₩{data.price?.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")} X {ctx?.value.deff}박</Typography>
+                                <Typography>₩{(Number(data.price) * ctx?.value.deff!).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography>
+                            </Box>
+                            <Box sx={{ display: "flex", justifyContent: "space-between", my: 1 }}>
+                                <Typography sx={{ textDecorationLine: "underline" }}>서비스 수수료</Typography>
+                                <Typography>₩{(Number(data.price) * ctx?.value.deff! * 0.16).toFixed(0).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography>
+                            </Box>
+                        </Box>
+                        <Divider sx={{ my: 2 }} />
+                        <Box>
+                            <Box sx={{ display: "flex", justifyContent: "space-between", my: 1 }}>
+                                <Typography sx={{ fontWeight: "bold" }}>총 합계</Typography>
+                                <Typography sx={{ fontWeight: "bold" }}>₩{(Number(data.price) * ctx?.value.deff! * 1.16).toFixed(0).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography>
+                            </Box>
+                        </Box>
+                    </>
+                }
             </Box>
-        </Box>
+        </Paper>
     )
 }

@@ -17,7 +17,6 @@ export default function BecomeHostHome() {
     }()
     
     },[])
-    console.log(arr);
     if(arr === undefined){
         return;
     } 

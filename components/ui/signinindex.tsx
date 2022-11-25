@@ -31,7 +31,6 @@ export default function Signinindex(props: { onPress: Function,onClose:Function 
     const emailhandle = async () => {
        if(email_check(emailref.current!.value)===true){
         let data = await chdEmailAPI(emailref.current!.value);
-        console.log(data);
         if (data.result === true) {
             props.onPress("PASSWORD", data.data)
         } else {

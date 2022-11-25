@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export default function ImagePreview({ image, deleteFunc, idx }:{image:any,deleteFunc:any,idx:any}) {
-    console.log(idx)
     return (
         <Box className="ImagePreview" sx={{ position: "relative", display: "flex", alignItems: "center", m: 1 }} draggable>
             <Box className="icon_container" sx={{ position: "absolute", display: "flex", width: "100%", height: "100%", justifyContent: "flex-end" }} onClick={deleteFunc}>
