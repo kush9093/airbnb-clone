@@ -18,3 +18,7 @@ export interface AccountData extends State {
     state: Date | null;
     provider:string;
 }
+
+export interface ReservationData {
+    orderId?:string;
+}

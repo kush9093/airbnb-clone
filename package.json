@@ -18,6 +18,7 @@
     "@mui/material": "^5.10.15",
     "@mui/x-date-pickers": "^5.0.8",
     "@mui/x-date-pickers-pro": "^5.0.8",
+    "@paypal/react-paypal-js": "^7.8.1",
     "@react-google-maps/api": "^2.16.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/formidable": "^2.0.5",
