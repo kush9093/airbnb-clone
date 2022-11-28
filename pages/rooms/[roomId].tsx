@@ -72,6 +72,17 @@ export default function RoomIndex({ itemId, response }: { itemId: string, respon
                             </Grid>
                         </Grid>
                     </Box>
+                    <Divider />
+                    <Box>
+                        <Typography>후기 (아직) 없음</Typography>
+                        <Box>
+                            <Typography>이 호스트의 다른 숙소에 대한 후기가 2개 있습니다. 다른 숙소 후기 보기</Typography>
+                        </Box>
+                    </Box>
+                    <Divider />
+                    <Box>
+                        <Typography>호스팅 지역</Typography>
+                    </Box>
 
                 </Grid>
 

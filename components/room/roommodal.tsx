@@ -9,9 +9,14 @@ import Datalange from "./datalange";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Humandata from "./humandata";
+import { useRouter } from "next/router";
+import { staytype } from "../../interface/stay";
 
 export default function Roommodal({ data }: { data: accomodationtype }) {
 
+    const router = useRouter();
+
+   
     const ctx = useContext(roomContext)
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -23,6 +28,24 @@ export default function Roommodal({ data }: { data: accomodationtype }) {
 
     const canBeOpen = ctx?.popopen && Boolean(anchorEl);
     const id = canBeOpen ? 'transition-popper' : undefined;
+
+    const reservation = () =>{
+        router.push({
+            pathname:"/book/stay/[productId]",
+            query :{roomId: (data._id)?.toString(),
+                numberOfAdults:1,
+                numberOfChildren:0,
+                numberOfInfants:0,
+                checkin:format(ctx?.value.startwith!, "yyyy-MM-dd"),
+                checkout:format(ctx?.value.endwidth!, "yyyy-MM-dd"),
+                guestCurrency:"KRW",
+            isWorkTrip:false,
+            numberOfGuests:1,
+            numberOfPets:0,
+            productId: (data._id)?.toString(),
+            code:"HMJZD2XTTN"}
+        } )
+    }
 
 
 
@@ -90,7 +113,7 @@ export default function Roommodal({ data }: { data: accomodationtype }) {
                 <Box>
                     <Box sx={{ my: 1 }}>
                             {ctx?.value.endwidth !== null && ctx?.value.startwith!.getTime()! - ctx?.value.endwidth!.getTime()! !== 0 ?
-                                <Button variant="contained" color="error" sx={{ width: "100%", mt: 1, py: 1 }}>
+                                <Button onClick={reservation} variant="contained" color="error" sx={{ width: "100%", mt: 1, py: 1 }}>
                                     <Typography variant="body1" sx={{ fontWeight: "bold" }}>예약하기</Typography>
                                 </Button> : 
                                 <Button onClick={(e)=>{e.stopPropagation();ctx?.chdDdopen(true)}} variant="contained" color="error" sx={{ width: "100%", mt: 1, py: 1 }}>
