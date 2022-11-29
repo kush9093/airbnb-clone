@@ -6,7 +6,7 @@ export const handler: NextApiHandler = async (req, res) => {
     const { method,body } = req;
     await dbConnect();
     if (method === "POST") {
-        const data = await accommodation.findOne({_id:body._id})
+        const data = await accommodation.findOne({_id:body._id}).populate("check").lean()
             if (data) {
             return res.json({ result: true, data})
         } else {

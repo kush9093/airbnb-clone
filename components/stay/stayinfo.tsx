@@ -6,11 +6,15 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
 import { staytype } from "../../interface/stay";
 import { accomodationtype } from "../../interface/accommodation";
-import { creatersv } from "../../lib/reservation-api";
+import { creatersv, findrsv } from "../../lib/reservation-api";
+import { useSession } from "next-auth/react";
 
 export default function StayInfo({ data, roomdata, price }: { data: staytype, roomdata: accomodationtype, price: string }) {
 
     const datad = data
+    const {data:session} = useSession();
+    console.log(session)
+
 
     const getDateDiff = (d1: Date | string, d2: Date | string) => {
         const date1 = new Date(d1!);
@@ -80,8 +84,10 @@ export default function StayInfo({ data, roomdata, price }: { data: staytype, ro
                 <Typography variant="caption">아래 버튼을 선택하면 호스트가 설정한 숙소 이용규칙, 에어비앤비 재예약 및 환불 정책에 동의하며, 피해에 대한 책임이 본인에게 있을 경우 에어비앤비가 결제 수단으로 청구의 조치를 취할 수 있다는 사실에 동의하는 것입니다. 호스트가 예약 요청을 수락하면 표시된 총액이 결제되는 데 동의합니다.</Typography>
             </Box>
             <Box>
-                <PayPalScriptProvider options={{ "client-id": "AVl47CN_HVs3ing7KVyWoIDlpoIC-JfiEg0tlbvIhb-fRGSuioRTTY6EH9HXKJWgjxchSPuooIFKsJht" }}>
-                    <PayPalButtons forceReRender={[price,]} style={{ layout: "horizontal" }}
+                <PayPalScriptProvider 
+                options={{ "client-id": "AVl47CN_HVs3ing7KVyWoIDlpoIC-JfiEg0tlbvIhb-fRGSuioRTTY6EH9HXKJWgjxchSPuooIFKsJht",
+                    intent:"authorize" }}>
+                    <PayPalButtons disabled={session==undefined?true:false} forceReRender={[price,]} style={{ layout: "horizontal" }}
                         createOrder={(data, actions) => {
                             const val = price === "full" ? 1 : 0.5
                             const pay = ((roomdata.price as number) * (getDateDiff(datad.checkin!, datad.checkout!)) * 1.16 * val / 1339).toFixed(2)
@@ -99,12 +105,19 @@ export default function StayInfo({ data, roomdata, price }: { data: staytype, ro
 
                         }}
                         onApprove={async (data, actions) => {
-                            console.log("결제 완료 후");
-                            // console.log(data);
-                            // console.log(actions);
-                            const obj = {orderId:data.orderID}
-                           const result = await creatersv(obj);
-                           console.log("result",result);
+                            console.log("결제 완료 후");  
+                            const obj = {
+                                orderId:data.orderID,
+                                hostId:roomdata._id,
+                                guestId:session?.user?.email!,
+                                checkIn:datad.checkin?.toString(),
+                                checkOut:datad.checkout?.toString(),
+                                numberOfGuests:datad.numberOfGuests,
+                                payd:price}
+                           const response = await creatersv(obj);
+                           if(response.result){
+                            actions.order?.authorize();
+                           }
                         }}
                     />
                 </PayPalScriptProvider>

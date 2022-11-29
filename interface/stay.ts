@@ -1,15 +1,15 @@
 import mongoose from "mongoose"
 
 export interface staytype {
-    productId?: String
-    numberOfAdults?: Number,
-    numberOfChildren?: Number,
-    numberOfInfants?: Number,
+    productId?: string
+    numberOfAdults?: number,
+    numberOfChildren?: number,
+    numberOfInfants?: number,
     checkin?: Date,
     checkout?: Date,
-    guestCurrency?: String,
-    isWorkTrip?: Boolean,
-    numberOfGuests?: Number,
-    numberOfPets?: Number,
-    code?: String
+    guestCurrency?: string,
+    isWorkTrip?: boolean,
+    numberOfGuests?: number,
+    numberOfPets?: number,
+    code?: string
 }

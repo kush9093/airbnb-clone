@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 
 
 export interface pwd {
@@ -21,4 +22,10 @@ export interface AccountData extends State {
 
 export interface ReservationData {
     orderId?:string;
+    hostId?:mongoose.Types.ObjectId
+    guestId?:string;
+    checkIn?:string;
+    checkOut?:string;
+    numberOfGuests?:number;
+    payd?:string
 }

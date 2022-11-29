@@ -15,9 +15,11 @@ import { format } from 'date-fns';
 export default function Datalange({ data, mode }: { data: accomodationtype, mode: string }) {
     const ctx = React.useContext(roomContext);
 
+    console.log(data.check!);
+
     const [value, setValue] = React.useState<DateRange<Date>>([ctx?.value.startwith!, ctx?.value.endwidth!]);
     return (
-        <Box onClick={(e)=>{e.stopPropagation()}}>
+        <Box onClick={(e) => { e.stopPropagation() }}>
             <Box sx={{ display: "flex" }}>
                 <Box sx={{ width: "50%" }}>
                     {mode === "default" &&
@@ -27,7 +29,7 @@ export default function Datalange({ data, mode }: { data: accomodationtype, mode
                         <Typography sx={{ fontWeight: "bold" }} variant='h6'>{ctx?.value.deff! > 0 ? `${data.address?.district}에서 ${ctx?.value.deff}박` : "날짜 선택"}</Typography>
                     }
                     <Box sx={{ display: "flex", color: "#aaa" }}>
-                        {value[1] && value[0]!.getTime() !== value[1]!.getTime() ?
+                        {value[0]&& value[1] && value[0]!.getTime() !== value[1]!.getTime() ?
                             <>
                                 <Typography variant='subtitle2'>{dateFormat(ctx?.value.startwith!)}</Typography>
                                 <Typography variant='subtitle2'>-</Typography>
@@ -57,20 +59,33 @@ export default function Datalange({ data, mode }: { data: accomodationtype, mode
             <Box>
                 <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ko} localeText={koKR.components.MuiLocalizationProvider.defaultProps.localeText} >
                     <StaticDateRangePicker
+                        disablePast={true}
                         shouldDisableDate={(day) => {
-                            return day.getTime() - Date.now() < 0 ? true : false;
+                            const dd = data.check?.find((e) => {
+                                return new Date(e.checkIn).getTime() - 86400000 <= day.getTime() && new Date(e.checkOut).getTime() - 86400000 > day.getTime()
+                            })
+                            if (dd) {
+                                return true
+                            } else {
+                                return false
+                            }
                         }
                         }
                         disableHighlightToday
                         displayStaticWrapperAs="desktop"
                         value={[ctx?.value.startwith!, ctx?.value.endwidth!]}
                         onChange={(newValue) => {
+                            const dd = data.check?.find((e) => {
+                                return new Date(e.checkIn).getTime() - 86400000 >= new Date(newValue[0]!).getTime() && new Date(e.checkOut).getTime() - 86400000 < new Date(newValue[1]!).getTime()})
+                                console.log("dd",dd);
+                            if(!dd){
                             setValue((prev) => {
                                 const day = new Date(newValue[1]!).getTime() - new Date(newValue[0]!).getTime()
                                 const deff = day / (1000 * 60 * 60 * 24)
                                 ctx?.chdvalue({ startwith: newValue[0], endwidth: newValue[1], deff: deff })
                                 return newValue
                             })
+                        }
 
                         }}
                         renderInput={(startProps, endProps) => (

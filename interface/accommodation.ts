@@ -1,29 +1,33 @@
 import mongoose from "mongoose";
 
 export interface accomodationtype {
-    _id?:mongoose.Types.ObjectId;
-    address? : {
-        RoadName:String;
-        RoadNumber:String;
-        cities:String;
-        country:String;
-        district:String;
-        lat:String;
-        lng:String;
+    _id?: mongoose.Types.ObjectId;
+    address?: {
+        RoadName: string;
+        RoadNumber: string;
+        cities: string;
+        country: string;
+        district: string;
+        lat: string;
+        lng: string;
     };
-    floor?:{
-        bathroom:Number;
-        bed:Number;
-        guest:Number;
+    floor?: {
+        bathroom: number;
+        bed: number;
+        guest: number;
     }
-    group?:String;
-    photos?:String[];
-    price?:Number;
-    publish?:Boolean;
-    receipt?:Date;
-    space?:String;
-    targetUser?:String;
-    title?:String;
-    type?:String;
+    group?: string;
+    photos?: string[];
+    price?: number;
+    publish?: boolean;
+    receipt?: Date;
+    space?: string;
+    targetUser?: string;
+    title?: string;
+    type?: string;
+    check?: {
+        checkIn: string,
+        checkOut: string,
+    }[]
 
 }

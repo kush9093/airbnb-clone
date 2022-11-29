@@ -94,6 +94,7 @@ export default function RoomIndex({ itemId, response }: { itemId: string, respon
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const data = await findacc(context.params?.roomId! as string)
+    console.log(data)
     return {
         props: { itemId: context.params?.roomId!, response: data.data },
     };

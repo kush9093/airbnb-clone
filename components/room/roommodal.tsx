@@ -11,6 +11,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Humandata from "./humandata";
 import { useRouter } from "next/router";
 import { staytype } from "../../interface/stay";
+import { useSession } from "next-auth/react";
 
 export default function Roommodal({ data }: { data: accomodationtype }) {
 

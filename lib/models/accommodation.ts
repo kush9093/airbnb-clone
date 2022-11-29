@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import reservation from "./reservation";
 
 const AccommodationSchema = new mongoose.Schema({
     targetUser: String,
@@ -25,7 +25,13 @@ const AccommodationSchema = new mongoose.Schema({
         bed:Number,
         bathroom:Number,
     },
-    photos:[String]
+    photos:[String],
+})
+
+AccommodationSchema.virtual("check",{
+    ref:reservation,
+    localField:"_id",
+    foreignField:"hostId"
 })
 
 export default (mongoose.models.Accommodation) || mongoose.model("Accommodation", AccommodationSchema);

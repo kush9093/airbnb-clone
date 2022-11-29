@@ -125,9 +125,9 @@ export default function Roomcontent({data}:{data:accomodationtype}) {
             </Box>
             <Box>
                 <Grid container spacing={2} columns={12} >
-                    {convenience.map((elm) => {
+                    {convenience.map((elm,idx) => {
                         return (
-                            <Grid item xs={12} md={6} sx={{ display: "flex" }} >
+                            <Grid key={idx} item xs={12} md={6} sx={{ display: "flex" }} >
                                 {elm.icons}
                                 <Typography sx={{ ml: 2 }}>{elm.name}</Typography>
                             </Grid>

@@ -10,14 +10,8 @@ export const handler: NextApiHandler<result> = async (req, res) => {
     await dbConnect();
   if (method === "POST") {
         try {
-            const document = req.body as ReservationData;
-            const arr = await Reservation.find({hostId:document.hostId,checkOut:{$gt:document.checkIn},checkIn:{$lt:document.checkOut}})
-            if(arr.length>0){
-                return res.status(422).json({result:false});
-            } else {
-                const data = await Reservation.create({...document});
-                return res.status(200).json({result:true})
-            }
+            const arr = await Reservation.find({hostId:req.body.hostId});
+            return res.status(200).json({result:true,data:arr});
             
         }catch(e){
             console.log(e);

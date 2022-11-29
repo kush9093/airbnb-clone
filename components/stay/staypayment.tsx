@@ -9,10 +9,9 @@ import { useState } from "react"
 
 
 export default function StayPayment({ data, roomdata,price,pricehandle }: { data: staytype, roomdata: accomodationtype,price:string,pricehandle:Function }) {
-
-
+ 
     const [personName, setPersonName] = useState<string>();
-
+    
 
     const handleChange = (event: SelectChangeEvent<typeof personName>) => {
         const {
