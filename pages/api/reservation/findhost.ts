@@ -14,7 +14,7 @@ export const handler: NextApiHandler<result> = async (req, res) => {
         try {
             const order = await Reservation.findOne({orderId:req.body.orderId});
             const room = await accommodation.findOne({_id:order?.hostId})
-            return res.status(200).json({result:true,order:order!,room:room});
+            return res.status(200).json({result:true,order:order!,room:room!});
             
         }catch(e){
             console.log(e);
