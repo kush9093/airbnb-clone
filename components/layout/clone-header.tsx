@@ -93,7 +93,7 @@ export default function CloneHeader() {
             <Box>
             <MenuItem sx={{fontWeight:"bold"}}>메시지</MenuItem>
             <MenuItem sx={{fontWeight:"bold"}}>알림</MenuItem>
-            <MenuItem sx={{fontWeight:"bold"}}>여행</MenuItem>
+            <MenuItem sx={{fontWeight:"bold"}} onClick={()=>{router.push("/travel")}}>여행</MenuItem>
             <MenuItem sx={{fontWeight:"bold"}}>위시리스트</MenuItem>
             <Divider />
             <MenuItem onClick={()=>{router.push("/become-a-host")}}>숙소 호스트 되기</MenuItem>

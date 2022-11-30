@@ -1,22 +1,20 @@
 import { NextApiHandler } from "next";
 import { ReservationData } from "../../../interface";
+import { accomodationtype } from "../../../interface/accommodation";
 import dbConnect from "../../../lib/dbConnect"
+import accommodation from "../../../lib/models/accommodation";
 import Reservation from "../../../lib/models/reservation";
 
-type result = { result: boolean, data?: any }
+type result = { result: boolean, order?:ReservationData,room?:accomodationtype,data?:any }
 
 export const handler: NextApiHandler<result> = async (req, res) => {
     const { method } = req;
     await dbConnect();
   if (method === "POST") {
         try {
-            let arr;
-            if(req.body.type == "guest"){
-                arr = await Reservation.find({guestId:req.body.guestId}).populate("hostdata").sort("checkIn").lean();
-            } else {
-                arr = await Reservation.find({hostId:req.body.hostId});
-            }
-            return res.status(200).json({result:true,data:arr});
+            const order = await Reservation.findOne({orderId:req.body.orderId});
+            const room = await accommodation.findOne({_id:order?.hostId})
+            return res.status(200).json({result:true,order:order!,room:room});
             
         }catch(e){
             console.log(e);

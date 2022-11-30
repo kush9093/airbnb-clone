@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { accomodationtype } from "../../interface/accommodation";
 import reservation from "./reservation";
 
 const AccommodationSchema = new mongoose.Schema({
@@ -29,9 +30,10 @@ const AccommodationSchema = new mongoose.Schema({
 })
 
 AccommodationSchema.virtual("check",{
-    ref:reservation,
+    ref:"Reservation",
     localField:"_id",
     foreignField:"hostId"
 })
 
-export default (mongoose.models.Accommodation) || mongoose.model("Accommodation", AccommodationSchema);
+
+export default (mongoose.models.Accommodation as mongoose.Model<accomodationtype>) || mongoose.model<accomodationtype>("Accommodation",AccommodationSchema);

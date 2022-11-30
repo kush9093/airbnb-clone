@@ -9,7 +9,15 @@ export const ReservationSchema = new mongoose.Schema<ReservationData>({
     checkIn:String,
     checkOut:String,
     numberOfGuests:Number,
-    payd:String
+    payd:String,
 })
+
+ReservationSchema.virtual("hostdata",{
+    ref:"Accommodation",
+    localField:"hostId",
+    foreignField:"_id",
+    justOne:true
+})
+
 
 export default (mongoose.models.Reservation as mongoose.Model<ReservationData>) || mongoose.model<ReservationData>("Reservation",ReservationSchema);

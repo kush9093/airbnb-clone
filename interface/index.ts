@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { accomodationtype } from "./accommodation";
 
 
 export interface pwd {
@@ -21,11 +22,14 @@ export interface AccountData extends State {
 }
 
 export interface ReservationData {
+    _id?:mongoose.Types.ObjectId;
     orderId?:string;
     hostId?:mongoose.Types.ObjectId
     guestId?:string;
     checkIn?:string;
     checkOut?:string;
     numberOfGuests?:number;
-    payd?:string
+    payd?:string;
+    type?:string;
+    hostdata?:accomodationtype;
 }

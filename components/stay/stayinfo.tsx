@@ -8,12 +8,17 @@ import { staytype } from "../../interface/stay";
 import { accomodationtype } from "../../interface/accommodation";
 import { creatersv, findrsv } from "../../lib/reservation-api";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function StayInfo({ data, roomdata, price }: { data: staytype, roomdata: accomodationtype, price: string }) {
 
     const datad = data
     const {data:session} = useSession();
-    console.log(session)
+    const router = useRouter();
+    // console.log(session)
+    // console.log("data",data);
+    // console.log("roomdata",roomdata);
+    // console.log("price",price);
 
 
     const getDateDiff = (d1: Date | string, d2: Date | string) => {
@@ -117,6 +122,10 @@ export default function StayInfo({ data, roomdata, price }: { data: staytype, ro
                            const response = await creatersv(obj);
                            if(response.result){
                             actions.order?.authorize();
+                            router.push({
+                                pathname:"/book/stay/confirm/[orderId]",
+                                query:{orderId:data.orderID}
+                            })
                            }
                         }}
                     />

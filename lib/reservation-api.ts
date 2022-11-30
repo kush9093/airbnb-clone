@@ -25,3 +25,16 @@ export async function findrsv(obj : ReservationData){
     const data = await response.json()
     return data
 }
+
+export async function findhost(orderId:string){
+    let endpoint =  `${process.env.NEXT_PUBLIC_SERVER_IP}/api/reservation/findhost`
+    const response = await fetch(endpoint,{
+        method: "POST",
+        body: JSON.stringify({orderId}),
+        headers:{
+            "Content-type":"application/json"
+        },
+    })
+    const data = await response.json()
+    return data
+}
