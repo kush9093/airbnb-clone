@@ -30,7 +30,7 @@ const AccommodationSchema = new mongoose.Schema({
 })
 
 AccommodationSchema.virtual("check",{
-    ref:"Reservation",
+    ref:reservation,
     localField:"_id",
     foreignField:"hostId"
 })
