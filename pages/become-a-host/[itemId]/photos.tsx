@@ -42,7 +42,6 @@ export default function PhotosPage(prop: any) {
             body: formData,
         })
 
-        console.log(response);
 
         router.push("/become-a-host/" + itemId + "/title");
     };
