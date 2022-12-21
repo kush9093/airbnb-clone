@@ -37,11 +37,12 @@ export default function PhotosPage(prop: any) {
         })
 
 
-        const response = await fetch("/api/hosting/uploadPhotos", {
+        const response = fetch("/api/hosting/uploadPhotos", {
             method: "POST",
             body: formData,
         })
 
+        console.log(response);
 
         router.push("/become-a-host/" + itemId + "/title");
     };
