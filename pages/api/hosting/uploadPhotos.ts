@@ -10,7 +10,7 @@ import dbConnect from "../../../lib/dbConnect"
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+const firebaseConfig = { 
     apiKey: "AIzaSyC17qxGa463wVKthjp2iEKKMm8Gh1llXLI",
     authDomain: "clone-project-a674d.firebaseapp.com",
     projectId: "clone-project-a674d",
