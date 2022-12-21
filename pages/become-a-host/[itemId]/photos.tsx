@@ -37,7 +37,7 @@ export default function PhotosPage(prop: any) {
         })
 
 
-        const response = fetch("/api/hosting/uploadPhotos", {
+        const response = await fetch("/api/hosting/uploadPhotos", {
             method: "POST",
             body: formData,
         })
